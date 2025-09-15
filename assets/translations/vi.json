@@ -1,0 +1,27 @@
+{
+    "language": "Tiếng Việt",
+    "auth": {
+        "continue_with": "Tiếp tục với {}",
+        "phone": "số điện thoại",
+        "username": "tên đăng nhập",
+        "email": "email",
+        "or": "hoặc",
+        "text_field_email": "@:auth.phone, @:auth.username, @:auth.or @:auth.email",
+        "text_field_password": "mật khẩu",
+        "forgot_password": "Quên mật khẩu?",
+        "log_in": "Đăng Nhập",
+        "dont_have_an_account": "Không có tài khoản?",
+        "sign_up": "đăng ký",
+        "validate_please_email": "Vui lòng nhập email của bạn.",
+        "validate_please_password": "Vui lòng nhập mật khẩu của bạn.",
+        "validate_email": "Vui lòng nhập địa chỉ email hợp lệ.",
+        "validate_length_password": "Mật khẩu phải có ít nhất 6 ký tự.",
+        "validate_uppercase_password": "Mật khẩu phải chứa ít nhất một chữ cái viết hoa."
+    },
+    "select_languege": {
+        "title": "Chọn ngôn ngữ",
+        "english": "Tiếng Anh",
+        "vietnamese": "Tiếng Việt",
+        "cancel": "Hủy"
+    }
+}
