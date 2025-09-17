@@ -1,46 +1,44 @@
 import 'package:app_instagram_clone/configs/translations/generated/locale_keys.g.dart';
-import 'package:app_instagram_clone/cores/helpers/validations/validator_form.dart';
+import 'package:app_instagram_clone/cores/helpers/validations/email/abs_email_validate.dart';
+import 'package:app_instagram_clone/cores/helpers/validations/password/abs_password_validate.dart';
 import 'package:app_instagram_clone/cores/widgets/button_base.dart';
 import 'package:app_instagram_clone/cores/widgets/text_form_field_base.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
-class FormLogin extends StatefulWidget {
-  const FormLogin({super.key});
+class FormSignInWithUserpass extends StatelessWidget {
+  const FormSignInWithUserpass({
+    super.key,
+    required AbsEmailValidate emailValidate,
+    required AbsPasswordValidate passwordValidate,
+    required VoidCallback actionSignInWithUserpass,
+    required VoidCallback actionForgotPassword,
+    required FocusNode focusNodeEmail,
+    required FocusNode focusNodePassword,
+    required TextEditingController controllerEmail,
+    required TextEditingController controllerPassword,
+    required GlobalKey<FormState> formKey,
+  }) : _emailValidate = emailValidate,
+       _passwordValidate = passwordValidate,
+       _actionSignInWithUserpass = actionSignInWithUserpass,
+       _actionForgotPassword = actionForgotPassword,
+       _focusNodeEmail = focusNodeEmail,
+       _focusNodePassword = focusNodePassword,
+       _controllerEmail = controllerEmail,
+       _controllerPassword = controllerPassword,
+       _formKey = formKey;
 
-  @override
-  State<FormLogin> createState() => _FormLoginState();
-}
+  final AbsEmailValidate _emailValidate;
+  final AbsPasswordValidate _passwordValidate;
+  final VoidCallback _actionSignInWithUserpass;
+  final VoidCallback _actionForgotPassword;
 
-class _FormLoginState extends State<FormLogin> {
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final FocusNode _focusNodeEmail;
+  final FocusNode _focusNodePassword;
+  final TextEditingController _controllerEmail;
+  final TextEditingController _controllerPassword;
 
-  late FocusNode _focusNodeEmail;
-  late FocusNode _focusNodePassword;
-  late TextEditingController _controllerEmail;
-  late TextEditingController _controllerPassword;
-
-  @override
-  void initState() {
-    super.initState();
-    _focusNodeEmail = FocusNode();
-    _focusNodePassword = FocusNode();
-    _controllerEmail = TextEditingController();
-    _controllerPassword = TextEditingController();
-  }
-
-  @override
-  void dispose() {
-    _focusNodeEmail.dispose();
-    _focusNodePassword.dispose();
-    _controllerEmail.dispose();
-    _controllerPassword.dispose();
-    super.dispose();
-  }
-
-  void _login() {}
-
-  void _forgotPassword() {}
+  final GlobalKey<FormState> _formKey;
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +51,7 @@ class _FormLoginState extends State<FormLogin> {
             controller: _controllerEmail,
             focusNode: _focusNodeEmail,
             hintText: LocaleKeys.auth_text_field_email.tr(),
-            validator: (value) => ValidatorForm().validateEmail(value),
+            validator: _emailValidate.validate,
             autovalidateMode: AutovalidateMode.onUserInteraction,
           ),
           const SizedBox(height: 8),
@@ -61,7 +59,7 @@ class _FormLoginState extends State<FormLogin> {
             controller: _controllerPassword,
             focusNode: _focusNodePassword,
             hintText: LocaleKeys.auth_text_field_password.tr(),
-            validator: (value) => ValidatorForm().validatePassword(value),
+            validator: _passwordValidate.validate,
             autovalidateMode: AutovalidateMode.onUserInteraction,
             obscureText: true,
           ),
@@ -69,7 +67,7 @@ class _FormLoginState extends State<FormLogin> {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               TextButton(
-                onPressed: _forgotPassword,
+                onPressed: _actionForgotPassword,
                 child: Text(
                   LocaleKeys.auth_forgot_password.tr(),
                   style: const TextStyle(
@@ -87,7 +85,7 @@ class _FormLoginState extends State<FormLogin> {
             child: ButtonBase(
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
-                  _login();
+                  _actionSignInWithUserpass;
                 }
                 _focusNodeEmail.requestFocus();
               },

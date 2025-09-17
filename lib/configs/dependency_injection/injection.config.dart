@@ -14,6 +14,14 @@ import 'package:app_instagram_clone/configs/network/interceptors/auth_intercepto
     as _i508;
 import 'package:app_instagram_clone/configs/network/interceptors/logger_interceptor.dart'
     as _i334;
+import 'package:app_instagram_clone/cores/helpers/validations/email/abs_email_validate.dart'
+    as _i488;
+import 'package:app_instagram_clone/cores/helpers/validations/email/imp_email_validate.dart'
+    as _i413;
+import 'package:app_instagram_clone/cores/helpers/validations/password/abs_password_validate.dart'
+    as _i884;
+import 'package:app_instagram_clone/cores/helpers/validations/password/imp_password_validate.dart'
+    as _i610;
 import 'package:app_instagram_clone/cores/storage/abstraction/abs_auth_token_storage.dart'
     as _i993;
 import 'package:app_instagram_clone/cores/storage/implementation/imp_auth_token_storage.dart'
@@ -45,6 +53,10 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i334.LoggerInterceptor>(() => _i334.LoggerInterceptor());
     gh.lazySingleton<_i993.AbsAuthTokenStorage>(
       () => _i789.ImpAuthTokenStorage(),
+    );
+    gh.lazySingleton<_i488.AbsEmailValidate>(() => _i413.ImpEmailValidate());
+    gh.lazySingleton<_i884.AbsPasswordValidate>(
+      () => _i610.ImpPasswordValidate(),
     );
     gh.lazySingleton<_i361.Dio>(
       () => dioModule.dio(

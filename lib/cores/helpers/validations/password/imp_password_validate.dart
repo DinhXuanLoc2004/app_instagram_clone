@@ -1,21 +1,13 @@
 import 'package:app_instagram_clone/configs/translations/generated/locale_keys.g.dart';
+import 'package:app_instagram_clone/cores/helpers/validations/password/abs_password_validate.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:injectable/injectable.dart';
 
-class ValidatorForm {
-  String? validateEmail(String? value) {
-    if (value == null || value.isEmpty) {
-      return LocaleKeys.auth_validate_please_email.tr();
-    }
+@LazySingleton(as: AbsPasswordValidate)
+class ImpPasswordValidate implements AbsPasswordValidate{
 
-    final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
-    if (!emailRegex.hasMatch(value)) {
-      return LocaleKeys.auth_validate_email.tr();
-    }
-
-    return null;
-  }
-
-  String? validatePassword(String? value) {
+  @override
+  String? validate(String? value) {
     if (value == null || value.isEmpty) {
       return LocaleKeys.auth_validate_please_password.tr();
     }
@@ -31,4 +23,5 @@ class ValidatorForm {
 
     return null;
   }
+  
 }

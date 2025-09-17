@@ -2,7 +2,7 @@ import 'package:app_instagram_clone/configs/dependency_injection/injection.dart'
 import 'package:app_instagram_clone/configs/theme/color/color_config.dart';
 import 'package:app_instagram_clone/configs/translations/enum/locales.dart';
 import 'package:app_instagram_clone/configs/theme/text/text_theme_config.dart';
-import 'package:app_instagram_clone/features/auth/presentation/pages/login_page.dart';
+import 'package:app_instagram_clone/features/auth/presentation/pages/sign_in_page.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
         textTheme: TextThemeConfig.TEXT_THEME,
       ),
       themeMode: ThemeMode.system,
-      home: const LoginPage(),
+      home: const SignInPage(),
     );
   }
 }
