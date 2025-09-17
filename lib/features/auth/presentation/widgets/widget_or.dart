@@ -5,9 +5,9 @@ class WidgetOr extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ThemeData themeData = Theme.of(context);
-    final ColorScheme colorScheme = themeData.colorScheme;
-    final Color colorContent = colorScheme.outline;
+
+    final Color colorContent = Theme.of(context).colorScheme.outline;
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,

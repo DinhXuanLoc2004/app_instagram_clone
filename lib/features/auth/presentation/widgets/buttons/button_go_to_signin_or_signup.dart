@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 class ButtonGoToSigninOrSignup extends StatelessWidget {
   const ButtonGoToSigninOrSignup({
     super.key,
-    required this.title,
-    required this.goToPage,
-  });
+    required String title,
+    required String goToPage,
+  }) : _goToPage = goToPage, _title = title;
 
-  final String title;
-  final String goToPage;
+  final String _title;
+  final String _goToPage;
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +18,7 @@ class ButtonGoToSigninOrSignup extends StatelessWidget {
       onPressed: () {},
       child: RichText(
         text: TextSpan(
-          text: title,
+          text: _title,
           style: TextStyle(
             color: colorScheme.outline,
             fontSize: 15,
@@ -27,7 +27,7 @@ class ButtonGoToSigninOrSignup extends StatelessWidget {
           ),
           children: [
             TextSpan(
-              text: ' $goToPage',
+              text: ' $_goToPage',
               style: TextStyle(
                 color: colorScheme.primary,
                 fontSize: 15,

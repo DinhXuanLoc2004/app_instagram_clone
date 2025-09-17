@@ -3,22 +3,28 @@ import 'package:flutter/material.dart';
 class TextFormFieldBase extends StatefulWidget {
   const TextFormFieldBase({
     super.key,
-    required this.controller,
-    required this.focusNode,
-    this.decoration,
-    required this.hintText,
-    required this.validator,
-    this.autovalidateMode = AutovalidateMode.disabled,
-    this.obscureText = false,
-  });
+    required TextEditingController controller,
+    required FocusNode focusNode,
+    InputDecoration? decoration,
+    required String hintText,
+    required String? Function(String?) validator,
+    AutovalidateMode autovalidateMode = AutovalidateMode.disabled,
+    bool obscureText = false,
+  }) : _obscureText = obscureText,
+       _autovalidateMode = autovalidateMode,
+       _validator = validator,
+       _decoration = decoration,
+       _hintText = hintText,
+       _focusNode = focusNode,
+       _controller = controller;
 
-  final TextEditingController controller;
-  final FocusNode focusNode;
-  final String hintText;
-  final InputDecoration? decoration;
-  final FormFieldValidator<String> validator;
-  final AutovalidateMode autovalidateMode;
-  final bool obscureText;
+  final TextEditingController _controller;
+  final FocusNode _focusNode;
+  final String _hintText;
+  final InputDecoration? _decoration;
+  final FormFieldValidator<String> _validator;
+  final AutovalidateMode _autovalidateMode;
+  final bool _obscureText;
 
   @override
   State<TextFormFieldBase> createState() => _TextFormFieldBaseState();
@@ -55,7 +61,7 @@ class _TextFormFieldBaseState extends State<TextFormFieldBase> {
 
   InputDecoration _defaultInputDecoration(ColorScheme colorScheme) {
     return InputDecoration(
-      hintText: widget.hintText,
+      hintText: widget._hintText,
       hintStyle: TextStyle(fontSize: 13, color: colorScheme.outline),
       filled: true,
       fillColor: colorScheme.surfaceContainer,
@@ -65,7 +71,7 @@ class _TextFormFieldBaseState extends State<TextFormFieldBase> {
       focusedErrorBorder: _borderError(colorScheme),
       errorStyle: const TextStyle(fontSize: 13),
       errorMaxLines: 3,
-      suffixIcon: widget.obscureText ? _buildIconButtonObscured() : null,
+      suffixIcon: widget._obscureText ? _buildIconButtonObscured() : null,
     );
   }
 
@@ -74,12 +80,12 @@ class _TextFormFieldBaseState extends State<TextFormFieldBase> {
     final ThemeData themeData = Theme.of(context);
     final ColorScheme colorScheme = themeData.colorScheme;
     return TextFormField(
-      focusNode: widget.focusNode,
-      controller: widget.controller,
-      decoration: widget.decoration ?? _defaultInputDecoration(colorScheme),
-      validator: widget.validator,
-      autovalidateMode: widget.autovalidateMode,
-      obscureText: widget.obscureText ? _isObscured : false,
+      focusNode: widget._focusNode,
+      controller: widget._controller,
+      decoration: widget._decoration ?? _defaultInputDecoration(colorScheme),
+      validator: widget._validator,
+      autovalidateMode: widget._autovalidateMode,
+      obscureText: widget._obscureText ? _isObscured : false,
     );
   }
 }

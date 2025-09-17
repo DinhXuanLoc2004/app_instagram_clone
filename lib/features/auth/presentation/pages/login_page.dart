@@ -1,4 +1,4 @@
-import 'package:app_instagram_clone/cores/configs/translations/generated/locale_keys.g.dart';
+import 'package:app_instagram_clone/configs/translations/generated/locale_keys.g.dart';
 import 'package:app_instagram_clone/features/auth/presentation/widgets/buttons/button_go_to_signin_or_signup.dart';
 import 'package:app_instagram_clone/features/auth/presentation/widgets/buttons/button_login_with_facebook.dart';
 import 'package:app_instagram_clone/features/auth/presentation/widgets/buttons/button_select_languege.dart';

@@ -1,4 +1,4 @@
-import 'package:app_instagram_clone/cores/configs/translations/generated/locale_keys.g.dart';
+import 'package:app_instagram_clone/configs/translations/generated/locale_keys.g.dart';
 import 'package:app_instagram_clone/cores/helpers/validations/validator_form.dart';
 import 'package:app_instagram_clone/cores/widgets/button_base.dart';
 import 'package:app_instagram_clone/cores/widgets/text_form_field_base.dart';

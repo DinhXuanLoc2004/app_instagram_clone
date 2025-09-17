@@ -1,30 +1,30 @@
 import 'dart:io';
 
-import 'package:app_instagram_clone/cores/configs/translations/enum/langueges.dart';
-import 'package:app_instagram_clone/cores/configs/translations/enum/locales.dart';
-import 'package:app_instagram_clone/cores/configs/translations/generated/locale_keys.g.dart';
+import 'package:app_instagram_clone/configs/translations/enum/langueges.dart';
+import 'package:app_instagram_clone/configs/translations/enum/locales.dart';
+import 'package:app_instagram_clone/configs/translations/generated/locale_keys.g.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ButtonSelectLanguege extends StatelessWidget {
-  const ButtonSelectLanguege({super.key, this.child, required this.context});
+  const ButtonSelectLanguege({super.key, Widget? child, required BuildContext context}) : _context = context, _child = child;
 
-  final Widget? child;
-  final BuildContext context;
+  final Widget? _child;
+  final BuildContext _context;
 
   void _setLocale(Locale locale) {
-    Navigator.pop(context);
-    context.setLocale(locale);
+    Navigator.pop(_context);
+    _context.setLocale(locale);
   }
 
   void _cancel() {
-    Navigator.pop(context);
+    Navigator.pop(_context);
   }
 
   void _buildCupertinaModalPopup() {
     showCupertinoModalPopup(
-      context: context,
+      context: _context,
       builder: (context) {
         return CupertinoActionSheet(
           title: Text(LocaleKeys.select_languege_title.tr()),
@@ -52,7 +52,7 @@ class ButtonSelectLanguege extends StatelessWidget {
   }
 
   Icon _buildIcon(bool condition) {
-    final ThemeData themeData = Theme.of(context);
+    final ThemeData themeData = Theme.of(_context);
     final ColorScheme colorScheme = themeData.colorScheme;
     return condition == true
         ? Icon(Icons.radio_button_checked, color: colorScheme.primary)
@@ -70,10 +70,10 @@ class ButtonSelectLanguege extends StatelessWidget {
   }
 
   void _buildModalBottomSheet() {
-    final ThemeData themeData = Theme.of(context);
+    final ThemeData themeData = Theme.of(_context);
     final ColorScheme colorScheme = themeData.colorScheme;
     showModalBottomSheet(
-      context: context,
+      context: _context,
       builder: (context) {
         return Column(
           mainAxisSize: MainAxisSize.min,
@@ -141,7 +141,7 @@ class ButtonSelectLanguege extends StatelessWidget {
   }
 
   Widget _buildChildDefault() {
-    final ThemeData themeData = Theme.of(context);
+    final ThemeData themeData = Theme.of(_context);
     final ColorScheme colorScheme = themeData.colorScheme;
     final Color colorContent = colorScheme.outline;
     return Row(
@@ -165,7 +165,7 @@ class ButtonSelectLanguege extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton(
       onPressed: _showLanguegePicker,
-      child: child ?? _buildChildDefault(),
+      child: _child ?? _buildChildDefault(),
     );
   }
 }
