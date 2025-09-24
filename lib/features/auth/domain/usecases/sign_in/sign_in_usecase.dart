@@ -1,3 +1,5 @@
+import 'package:app_instagram_clone/cores/error/failure.dart';
+import 'package:app_instagram_clone/cores/helpers/result/result.dart';
 import 'package:app_instagram_clone/features/auth/domain/ports/inputs/sign-in/abstractions/abs_sign_in_input.dart';
 import 'package:app_instagram_clone/features/auth/domain/entities/auth_token_entity.dart';
 import 'package:app_instagram_clone/features/auth/domain/usecases/sign_in/strategy/abstractions/abs_sign_in_strategy.dart';
@@ -7,7 +9,7 @@ class SignInUsecase<T extends AbsSignInInput> {
 
   const SignInUsecase({required AbsSignInStrategy absSignInStrategy}) : _absSignInStrategy = absSignInStrategy;
 
-  Future<AuthTokenEntity> executed(T input){
+  Future<Result<AuthTokenEntity, Failure>> executed(T input){
     return _absSignInStrategy.signIn(input);
   }
 }

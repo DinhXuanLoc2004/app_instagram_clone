@@ -15,14 +15,14 @@ import '../../domain/entities/auth_token_entity.dart' as _i5;
 import '../../domain/ports/inputs/sign-in/extendtions/sign_in_with_userpass_input.dart'
     as _i3;
 import '../DTOs/requests/sign_in_with_userpass_request.dart' as _i2;
-import '../DTOs/responses/jwt_response.dart' as _i4;
+import '../DTOs/responses/auth_token_response.dart' as _i4;
 
 /// {@template package:app_instagram_clone/features/auth/data/mappers/auth_mapper.dart}
 /// Available mappings:
 /// - `SignInWithUserpassRequest` → `SignInWithUserpassInput`.
 /// - `SignInWithUserpassInput` → `SignInWithUserpassRequest`.
-/// - `JwtResponse` → `AuthTokenEntity`.
-/// - `AuthTokenEntity` → `JwtResponse`.
+/// - `AuthTokenResponse` → `AuthTokenEntity`.
+/// - `AuthTokenEntity` → `AuthTokenResponse`.
 /// - `AuthTokenEntity` → `AuthTokenModel`.
 /// {@endtemplate}
 class $AuthMapper implements _i1.AutoMapprInterface {
@@ -50,16 +50,16 @@ class $AuthMapper implements _i1.AutoMapprInterface {
             targetTypeOf == _typeOf<_i2.SignInWithUserpassRequest?>())) {
       return true;
     }
-    if ((sourceTypeOf == _typeOf<_i4.JwtResponse>() ||
-            sourceTypeOf == _typeOf<_i4.JwtResponse?>()) &&
+    if ((sourceTypeOf == _typeOf<_i4.AuthTokenResponse>() ||
+            sourceTypeOf == _typeOf<_i4.AuthTokenResponse?>()) &&
         (targetTypeOf == _typeOf<_i5.AuthTokenEntity>() ||
             targetTypeOf == _typeOf<_i5.AuthTokenEntity?>())) {
       return true;
     }
     if ((sourceTypeOf == _typeOf<_i5.AuthTokenEntity>() ||
             sourceTypeOf == _typeOf<_i5.AuthTokenEntity?>()) &&
-        (targetTypeOf == _typeOf<_i4.JwtResponse>() ||
-            targetTypeOf == _typeOf<_i4.JwtResponse?>())) {
+        (targetTypeOf == _typeOf<_i4.AuthTokenResponse>() ||
+            targetTypeOf == _typeOf<_i4.AuthTokenResponse?>())) {
       return true;
     }
     if ((sourceTypeOf == _typeOf<_i5.AuthTokenEntity>() ||
@@ -269,26 +269,26 @@ class $AuthMapper implements _i1.AutoMapprInterface {
           )
           as TARGET);
     }
-    if ((sourceTypeOf == _typeOf<_i4.JwtResponse>() ||
-            sourceTypeOf == _typeOf<_i4.JwtResponse?>()) &&
+    if ((sourceTypeOf == _typeOf<_i4.AuthTokenResponse>() ||
+            sourceTypeOf == _typeOf<_i4.AuthTokenResponse?>()) &&
         (targetTypeOf == _typeOf<_i5.AuthTokenEntity>() ||
             targetTypeOf == _typeOf<_i5.AuthTokenEntity?>())) {
       if (canReturnNull && model == null) {
         return null;
       }
-      return (_map__i4$JwtResponse_To__i5$AuthTokenEntity(
-            (model as _i4.JwtResponse?),
+      return (_map__i4$AuthTokenResponse_To__i5$AuthTokenEntity(
+            (model as _i4.AuthTokenResponse?),
           )
           as TARGET);
     }
     if ((sourceTypeOf == _typeOf<_i5.AuthTokenEntity>() ||
             sourceTypeOf == _typeOf<_i5.AuthTokenEntity?>()) &&
-        (targetTypeOf == _typeOf<_i4.JwtResponse>() ||
-            targetTypeOf == _typeOf<_i4.JwtResponse?>())) {
+        (targetTypeOf == _typeOf<_i4.AuthTokenResponse>() ||
+            targetTypeOf == _typeOf<_i4.AuthTokenResponse?>())) {
       if (canReturnNull && model == null) {
         return null;
       }
-      return (_map__i5$AuthTokenEntity_To__i4$JwtResponse(
+      return (_map__i5$AuthTokenEntity_To__i4$AuthTokenResponse(
             (model as _i5.AuthTokenEntity?),
           )
           as TARGET);
@@ -365,14 +365,14 @@ class $AuthMapper implements _i1.AutoMapprInterface {
     );
   }
 
-  _i5.AuthTokenEntity _map__i4$JwtResponse_To__i5$AuthTokenEntity(
-    _i4.JwtResponse? input,
+  _i5.AuthTokenEntity _map__i4$AuthTokenResponse_To__i5$AuthTokenEntity(
+    _i4.AuthTokenResponse? input,
   ) {
     final model = input;
     if (model == null) {
       throw Exception(
-        r'Mapping JwtResponse → AuthTokenEntity failed because JwtResponse was null, and no default value was provided. '
-        r'Consider setting the whenSourceIsNull parameter on the MapType<JwtResponse, AuthTokenEntity> to handle null values during mapping.',
+        r'Mapping AuthTokenResponse → AuthTokenEntity failed because AuthTokenResponse was null, and no default value was provided. '
+        r'Consider setting the whenSourceIsNull parameter on the MapType<AuthTokenResponse, AuthTokenEntity> to handle null values during mapping.',
       );
     }
     return _i5.AuthTokenEntity(
@@ -381,17 +381,17 @@ class $AuthMapper implements _i1.AutoMapprInterface {
     );
   }
 
-  _i4.JwtResponse _map__i5$AuthTokenEntity_To__i4$JwtResponse(
+  _i4.AuthTokenResponse _map__i5$AuthTokenEntity_To__i4$AuthTokenResponse(
     _i5.AuthTokenEntity? input,
   ) {
     final model = input;
     if (model == null) {
       throw Exception(
-        r'Mapping AuthTokenEntity → JwtResponse failed because AuthTokenEntity was null, and no default value was provided. '
-        r'Consider setting the whenSourceIsNull parameter on the MapType<AuthTokenEntity, JwtResponse> to handle null values during mapping.',
+        r'Mapping AuthTokenEntity → AuthTokenResponse failed because AuthTokenEntity was null, and no default value was provided. '
+        r'Consider setting the whenSourceIsNull parameter on the MapType<AuthTokenEntity, AuthTokenResponse> to handle null values during mapping.',
       );
     }
-    return _i4.JwtResponse(
+    return _i4.AuthTokenResponse(
       accessToken: model.accessToken,
       refreshToken: model.refreshToken,
     );

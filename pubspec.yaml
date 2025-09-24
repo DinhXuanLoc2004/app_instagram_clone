@@ -41,10 +41,11 @@ dependencies:
   get_it: ^8.2.0
   injectable: ^2.5.1
   retrofit: ^4.6.0
-  logger: ^2.6.0  # for logging purpose
+  logger: ^2.6.1  # for logging purpose
   json_annotation: ^4.9.0
   auto_mappr_annotation: ^2.3.0
   flutter_secure_storage: ^9.2.4
+  freezed_annotation: ^3.1.0
 
 dev_dependencies:
   flutter_test:
@@ -58,6 +59,7 @@ dev_dependencies:
   retrofit_generator: ^10.0.1
   json_serializable: ^6.11.1
   auto_mappr: ^2.10.0
+  freezed: ^3.2.3
 
 flutter:
 

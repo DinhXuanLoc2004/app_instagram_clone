@@ -1,12 +1,10 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'jwt_response.dart';
+part of 'option_extra.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-JwtResponse _$JwtResponseFromJson(Map<String, dynamic> json) => JwtResponse(
-  accessToken: json['accessToken'] as String,
-  refreshToken: json['refreshToken'] as String,
-);
+Map<String, dynamic> _$OptionExtraToJson(OptionExtra instance) =>
+    <String, dynamic>{'skipAuth': instance.skipAuth};

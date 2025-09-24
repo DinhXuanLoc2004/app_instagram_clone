@@ -49,7 +49,6 @@ extension GetItInjectableX on _i174.GetIt {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     final dioModule = _$DioModule();
     gh.lazySingleton<_i620.AuthMapper>(() => _i620.AuthMapper());
-    gh.lazySingleton<_i508.AuthInterceptor>(() => _i508.AuthInterceptor());
     gh.lazySingleton<_i334.LoggerInterceptor>(() => _i334.LoggerInterceptor());
     gh.lazySingleton<_i993.AbsAuthTokenStorage>(
       () => _i789.ImpAuthTokenStorage(),
@@ -57,6 +56,9 @@ extension GetItInjectableX on _i174.GetIt {
     gh.lazySingleton<_i488.AbsEmailValidate>(() => _i413.ImpEmailValidate());
     gh.lazySingleton<_i884.AbsPasswordValidate>(
       () => _i610.ImpPasswordValidate(),
+    );
+    gh.lazySingleton<_i508.AuthInterceptor>(
+      () => _i508.AuthInterceptor(gh<_i993.AbsAuthTokenStorage>()),
     );
     gh.lazySingleton<_i361.Dio>(
       () => dioModule.dio(
