@@ -1,3 +1,4 @@
+import 'package:app_instagram_clone/configs/logger/log.dart';
 import 'package:app_instagram_clone/configs/network/extras/option_extra.dart';
 import 'package:app_instagram_clone/configs/network/responses/successful/successful_response_wrapper.dart';
 import 'package:app_instagram_clone/cores/error/failure.dart';
@@ -41,6 +42,7 @@ class ImpAuthRepostitory extends AbsAuthRepository {
             body: request,
             extras: _optionExtra.toJson(),
           );
+      Log.debug('response:: $response');
       final AuthTokenResponse authTokenResponse = response.metadata;
       final AuthTokenEntity authTokenEntity = _authMapper.convert(
         authTokenResponse,

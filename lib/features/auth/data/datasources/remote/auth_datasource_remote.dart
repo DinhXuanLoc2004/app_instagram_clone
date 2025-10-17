@@ -13,7 +13,7 @@ abstract class AuthDatasourceRemote {
   @factoryMethod
   factory AuthDatasourceRemote(Dio dio) = _AuthDatasourceRemote;
 
-  @POST('auth/sign-in/userpass')
+  @POST('/auth/sign-in/userpass')
   Future<SuccessfulResponseWrapper<AuthTokenResponse>> signInWithUserpass({
     @Body() required SignInWithUserpassRequest body, 
     @Extras() Map<String, dynamic>? extras,

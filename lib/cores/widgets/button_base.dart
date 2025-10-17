@@ -6,7 +6,11 @@ class ButtonBase extends StatelessWidget {
     required void Function() onPressed,
     required Widget child,
     ButtonStyle? style,
-  }) : _style = style, _child = child, _onPressed = onPressed;
+    bool? isLoading,
+  }) : _style = style,
+       _child = child,
+       _onPressed = onPressed,
+       _isLoading = isLoading ?? false;
 
   final VoidCallback _onPressed;
 
@@ -14,19 +18,27 @@ class ButtonBase extends StatelessWidget {
 
   final ButtonStyle? _style;
 
+  final bool _isLoading;
+
   @override
   Widget build(BuildContext context) {
     final ThemeData themeData = Theme.of(context);
     final ColorScheme colorScheme = themeData.colorScheme;
 
     return ElevatedButton(
-      onPressed: _onPressed,
+      onPressed: _isLoading ? null : _onPressed,
       style: ElevatedButton.styleFrom(
         elevation: 0,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
         backgroundColor: colorScheme.primary,
       ).merge(_style),
-      child: _child,
+      child: _isLoading
+          ? const SizedBox(
+              width: 50,
+              height: 50,
+              child: CircularProgressIndicator(color: Colors.white),
+            )
+          : _child,
     );
   }
 }

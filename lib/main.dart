@@ -2,9 +2,12 @@ import 'package:app_instagram_clone/configs/dependency_injection/injection.dart'
 import 'package:app_instagram_clone/configs/theme/color/color_config.dart';
 import 'package:app_instagram_clone/configs/translations/enum/locales.dart';
 import 'package:app_instagram_clone/configs/theme/text/text_theme_config.dart';
-import 'package:app_instagram_clone/features/auth/presentation/pages/sign_in_page.dart';
+import 'package:app_instagram_clone/cores/bloc/bloc_observer_custom.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide RouterConfig;
+import 'package:app_instagram_clone/configs/routes/router_config.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() async {
   configureDependencies();
@@ -13,6 +16,8 @@ void main() async {
   // debugPaintSizeEnabled = true;
 
   const String PATH_TRANSLATION = 'assets/translations';
+
+  Bloc.observer = BlocObserverCustom();
 
   runApp(
     EasyLocalization(
@@ -29,7 +34,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
+      routerConfig: RouterConfig.router,
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,
       locale: context.locale,
@@ -42,7 +48,6 @@ class MyApp extends StatelessWidget {
         textTheme: TextThemeConfig.TEXT_THEME,
       ),
       themeMode: ThemeMode.system,
-      home: const SignInPage(),
     );
   }
 }

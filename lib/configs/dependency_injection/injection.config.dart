@@ -36,6 +36,8 @@ import 'package:app_instagram_clone/features/auth/domain/abstract_repositories/a
     as _i719;
 import 'package:app_instagram_clone/features/auth/domain/usecases/sign_in/strategy/implementations/sign_in_with_userpass_strategy.dart'
     as _i441;
+import 'package:app_instagram_clone/features/auth/presentation/blocs/sign-in/sign_in_bloc.dart'
+    as _i914;
 import 'package:dio/dio.dart' as _i361;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
@@ -80,6 +82,9 @@ extension GetItInjectableX on _i174.GetIt {
       () => _i441.SignInWithUserpassStrategy(
         authRepository: gh<_i719.AbsAuthRepository>(),
       ),
+    );
+    gh.lazySingleton<_i914.SignInBloc>(
+      () => _i914.SignInBloc(gh<_i441.SignInWithUserpassStrategy>()),
     );
     return this;
   }

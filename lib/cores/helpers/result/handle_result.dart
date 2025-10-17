@@ -66,7 +66,7 @@ abstract base class HandleResult<T> {
   ///   error: (failure) => print('Parsing error: ${failure.message}'),
   /// );
   /// ```
-  Result<T, Failure> guard(T Function() operation) {
+  static Result<T, Failure> guard<T>(T Function() operation) {
     try {
       final T data = operation();
       return Success(data);

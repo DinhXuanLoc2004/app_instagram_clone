@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-abstract class ColorConfig {
+abstract final class ColorConfig {
   static const Color PRIMARY_COLOR = Color(0xFF1877F2);
 
-  static ColorScheme colorSchemeLight = createColorScheme(Brightness.light);
+  static final ColorScheme colorSchemeLight = createColorScheme(Brightness.light);
 
-  static ColorScheme colorSchemeDark = createColorScheme(Brightness.dark);
+  static final ColorScheme colorSchemeDark = createColorScheme(Brightness.dark);
 
   static ColorScheme createColorScheme(Brightness brightness) {
     return brightness == Brightness.light

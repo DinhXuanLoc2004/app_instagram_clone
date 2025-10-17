@@ -10,7 +10,14 @@ abstract class DioModule {
     AuthInterceptor authInterceptor,
     LoggerInterceptor loggerInterceptor,
   ) {
-    const String BASE_URL = 'http://localhost:8888/api/v1';
+    const String SCHEME = 'http';
+    // const String HOST = 'localhost';
+    const String HOST = '192.168.1.7';
+    const int PORT = 8888;
+    const String BASE_PATH = 'api';
+    const int VERSION = 1;
+
+    const String BASE_URL = '$SCHEME://$HOST:$PORT/$BASE_PATH/v$VERSION';
     const Duration CONNECT_TIMEOUT = Duration(seconds: 10);
     const Duration RECEIVE_TIMEOUT = Duration(seconds: 10);
 

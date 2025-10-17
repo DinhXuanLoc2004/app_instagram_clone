@@ -36,7 +36,7 @@ class _AuthDatasourceRemote implements AuthDatasourceRemote {
           Options(method: 'POST', headers: _headers, extra: _extra)
               .compose(
                 _dio.options,
-                'auth/sign-in/userpass',
+                '/auth/sign-in/userpass',
                 queryParameters: queryParameters,
                 data: _data,
               )

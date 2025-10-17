@@ -1,0 +1,37 @@
+import 'package:app_instagram_clone/configs/routes/branchs/add_media_branch.dart';
+import 'package:app_instagram_clone/configs/routes/branchs/post_branch.dart';
+import 'package:app_instagram_clone/configs/routes/branchs/profile_branch.dart';
+import 'package:app_instagram_clone/configs/routes/branchs/reel_branch.dart';
+import 'package:app_instagram_clone/configs/routes/branchs/search_branch.dart';
+import 'package:app_instagram_clone/configs/routes/router_enum.dart';
+import 'package:app_instagram_clone/configs/routes/routes/sign_in_route.dart';
+import 'package:app_instagram_clone/cores/widgets/scaffold_with_nav_bar.dart';
+import 'package:go_router/go_router.dart';
+
+abstract final class RouterConfig {
+  static final List<StatefulShellBranch> _listBranchs = [
+    PostBranchs.branch,
+    SearchBranchs.branch,
+    AddMediaBranch.branch,
+    ReelBranch.branch,
+    ProfileBranch.branch,
+  ];
+
+  static final StatefulShellRoute _statefulShellRoute =
+      StatefulShellRoute.indexedStack(
+        builder: (context, state, navigationShell) =>
+            ScaffoldWithNavBar(navigationShell: navigationShell),
+        branches: _listBranchs,
+      );
+
+  static final List<RouteBase> _routes = <RouteBase>[
+    _statefulShellRoute,
+    SignInRoute.route,
+  ];
+
+  static final GoRouter router = GoRouter(
+    debugLogDiagnostics: true,
+    initialLocation: RouterEnum.post.path,
+    routes: _routes,
+  );
+}

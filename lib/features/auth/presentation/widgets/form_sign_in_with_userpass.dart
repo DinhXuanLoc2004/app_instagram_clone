@@ -18,6 +18,7 @@ class FormSignInWithUserpass extends StatelessWidget {
     required TextEditingController controllerEmail,
     required TextEditingController controllerPassword,
     required GlobalKey<FormState> formKey,
+    required bool isLoading
   }) : _emailValidate = emailValidate,
        _passwordValidate = passwordValidate,
        _actionSignInWithUserpass = actionSignInWithUserpass,
@@ -26,7 +27,8 @@ class FormSignInWithUserpass extends StatelessWidget {
        _focusNodePassword = focusNodePassword,
        _controllerEmail = controllerEmail,
        _controllerPassword = controllerPassword,
-       _formKey = formKey;
+       _formKey = formKey,
+       _isLoading = isLoading;
 
   final AbsEmailValidate _emailValidate;
   final AbsPasswordValidate _passwordValidate;
@@ -39,6 +41,8 @@ class FormSignInWithUserpass extends StatelessWidget {
   final TextEditingController _controllerPassword;
 
   final GlobalKey<FormState> _formKey;
+
+  final bool _isLoading;
 
   @override
   Widget build(BuildContext context) {
@@ -83,11 +87,12 @@ class FormSignInWithUserpass extends StatelessWidget {
           SizedBox(
             width: double.infinity,
             child: ButtonBase(
+              isLoading: _isLoading,
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
-                  _actionSignInWithUserpass;
+                  _actionSignInWithUserpass();
                 }
-                _focusNodeEmail.requestFocus();
+                // _focusNodeEmail.requestFocus();
               },
               style: ElevatedButton.styleFrom(
                 padding: const EdgeInsets.symmetric(vertical: 10),
