@@ -11,7 +11,7 @@ import 'package:app_instagram_clone/features/auth/presentation/widgets/buttons/b
 import 'package:app_instagram_clone/features/auth/presentation/widgets/buttons/button_login_with_facebook.dart';
 import 'package:app_instagram_clone/features/auth/presentation/widgets/buttons/button_select_languege.dart';
 import 'package:app_instagram_clone/features/auth/presentation/widgets/form_sign_in_with_userpass.dart';
-import 'package:app_instagram_clone/cores/widgets/logo_text_instagram.dart';
+import 'package:app_instagram_clone/cores/widgets/logos/logo_text_instagram.dart';
 import 'package:app_instagram_clone/features/auth/presentation/widgets/widget_or.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';

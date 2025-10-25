@@ -5,7 +5,7 @@ import 'package:app_instagram_clone/configs/routes/branchs/reel_branch.dart';
 import 'package:app_instagram_clone/configs/routes/branchs/search_branch.dart';
 import 'package:app_instagram_clone/configs/routes/router_enum.dart';
 import 'package:app_instagram_clone/configs/routes/routes/sign_in_route.dart';
-import 'package:app_instagram_clone/cores/widgets/scaffold_with_nav_bar.dart';
+import 'package:app_instagram_clone/cores/widgets/bars/scaffold_with_nav_bar.dart';
 import 'package:go_router/go_router.dart';
 
 abstract final class RouterConfig {

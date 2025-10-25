@@ -1,4 +1,4 @@
-import 'package:app_instagram_clone/cores/widgets/avatar.dart';
+import 'package:app_instagram_clone/cores/widgets/others/avatar.dart';
 import 'package:app_instagram_clone/features/story/domain/entities/account_story_entity.dart';
 import 'package:flutter/material.dart';
 

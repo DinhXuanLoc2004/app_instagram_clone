@@ -1,5 +1,6 @@
-import 'package:app_instagram_clone/cores/widgets/icon_message_circle.dart';
-import 'package:app_instagram_clone/cores/widgets/logo_text_instagram.dart';
+import 'package:app_instagram_clone/cores/widgets/buttons/ink_well_button.dart';
+import 'package:app_instagram_clone/cores/widgets/icons/icon_message_circle.dart';
+import 'package:app_instagram_clone/cores/widgets/logos/logo_text_instagram.dart';
 import 'package:flutter/material.dart';
 import 'package:material_symbols_icons/symbols.dart';
 
@@ -7,9 +8,9 @@ class FeedAppBar extends StatelessWidget {
   const FeedAppBar({super.key});
 
   Widget _buildLeading(ColorScheme colorScheme) {
-    return IconButton(
+    return InkWellButton(
       onPressed: () {},
-      icon: Row(
+      child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           LogoTextInstagram(
@@ -33,16 +34,16 @@ class FeedAppBar extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
-        IconButton(
+        InkWellButton(
           onPressed: () {},
-          icon: Icon(
+          child: Icon(
             Symbols.favorite,
             color: colorScheme.onSurface,
             weight: 700,
           ),
         ),
-        const SizedBox(width: 0),
-        IconButton(onPressed: () {}, icon: const IconMessageCircle()),
+        const SizedBox(width: 16),
+        InkWellButton(onPressed: () {}, child: const IconMessageCircle()),
       ],
     );
   }

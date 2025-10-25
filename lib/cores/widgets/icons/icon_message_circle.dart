@@ -1,4 +1,4 @@
-import 'package:app_instagram_clone/cores/widgets/message_circle_custom_paint.dart';
+import 'package:app_instagram_clone/cores/widgets/custom_painters/message_circle_custom_paint.dart';
 import 'package:flutter/material.dart';
 
 class IconMessageCircle extends StatelessWidget {
@@ -12,9 +12,10 @@ class IconMessageCircle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeData themeData = Theme.of(context);
+    final ColorScheme colorScheme = themeData.colorScheme;
     return CustomPaint(
-      size: Size(_size, _size),
-      painter: MessageCircleCustomPaint(colorScheme: themeData.colorScheme),
+      size: Size.square(_size),
+      painter: MessageCircleCustomPaint(color: colorScheme.onSurface),
     );
   }
 }

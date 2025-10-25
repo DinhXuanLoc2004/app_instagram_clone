@@ -4,20 +4,20 @@ import 'package:flutter/material.dart';
 
 class MessageCircleCustomPaint extends CustomPainter {
   MessageCircleCustomPaint({
-    required ColorScheme colorScheme,
-    double? strokeWidth,
-  }) : _colorScheme = colorScheme,
-       _strokeWidth = strokeWidth ?? _STROKE_WIDTH_DEFAULT;
+    Color color = Colors.black,
+    double strokeWidth = _STROKE_WIDTH_DEFAULT,
+  }) : _color = color,
+       _strokeWidth = strokeWidth;
 
   static const double _STROKE_WIDTH_DEFAULT = 1.85;
 
-  final ColorScheme _colorScheme;
+  final Color _color;
   final double _strokeWidth;
 
   @override
   void paint(Canvas canvas, Size size) {
     final Paint paint = Paint()
-      ..color = _colorScheme.onSurface
+      ..color = _color
       ..strokeWidth = _strokeWidth
       ..strokeCap = StrokeCap.round
       ..style = PaintingStyle.stroke;
