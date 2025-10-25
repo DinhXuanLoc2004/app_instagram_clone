@@ -3,8 +3,8 @@ import 'package:app_instagram_clone/cores/widgets/logo_text_instagram.dart';
 import 'package:flutter/material.dart';
 import 'package:material_symbols_icons/symbols.dart';
 
-class PostAppBar extends StatelessWidget {
-  const PostAppBar({super.key});
+class FeedAppBar extends StatelessWidget {
+  const FeedAppBar({super.key});
 
   Widget _buildLeading(ColorScheme colorScheme) {
     return IconButton(
@@ -42,10 +42,7 @@ class PostAppBar extends StatelessWidget {
           ),
         ),
         const SizedBox(width: 0),
-        // IconButton(
-        //   onPressed: () {},
-        //   icon: const IconMessageCircle(),
-        // ),
+        IconButton(onPressed: () {}, icon: const IconMessageCircle()),
       ],
     );
   }
@@ -54,10 +51,13 @@ class PostAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final ThemeData themeData = Theme.of(context);
     final ColorScheme colorScheme = themeData.colorScheme;
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [_buildLeading(colorScheme), _buildActions(colorScheme)],
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [_buildLeading(colorScheme), _buildActions(colorScheme)],
+      ),
     );
   }
 }

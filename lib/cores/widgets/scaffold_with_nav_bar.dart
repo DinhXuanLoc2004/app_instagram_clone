@@ -32,7 +32,7 @@ class ScaffoldWithNavBar extends StatelessWidget {
       const BottomNavigationBarItem(
         icon: Icon(Symbols.home_filled, fill: 0, weight: 500),
         activeIcon: Icon(Symbols.home_filled, fill: 1),
-        label: 'home',
+        label: 'feed',
       ),
       const BottomNavigationBarItem(
         icon: Icon(Symbols.search, weight: 400),

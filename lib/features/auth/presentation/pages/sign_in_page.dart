@@ -94,7 +94,7 @@ class _SignInPageState extends State<SignInPage> {
                     BlocConsumer<SignInBloc, SignInState>(
                       listener: (context, state) {
                         state.whenOrNull(
-                          success: () => context.goNamed(RouterNames.POST),
+                          success: () => context.goNamed(RouterNames.FEED),
                         );
                       },
                       buildWhen: (previous, current) => current.maybeWhen(

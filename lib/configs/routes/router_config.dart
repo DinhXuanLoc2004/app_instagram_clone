@@ -1,5 +1,5 @@
 import 'package:app_instagram_clone/configs/routes/branchs/add_media_branch.dart';
-import 'package:app_instagram_clone/configs/routes/branchs/post_branch.dart';
+import 'package:app_instagram_clone/configs/routes/branchs/feed_branch.dart';
 import 'package:app_instagram_clone/configs/routes/branchs/profile_branch.dart';
 import 'package:app_instagram_clone/configs/routes/branchs/reel_branch.dart';
 import 'package:app_instagram_clone/configs/routes/branchs/search_branch.dart';
@@ -10,7 +10,7 @@ import 'package:go_router/go_router.dart';
 
 abstract final class RouterConfig {
   static final List<StatefulShellBranch> _listBranchs = [
-    PostBranchs.branch,
+    FeedBranch.branch,
     SearchBranchs.branch,
     AddMediaBranch.branch,
     ReelBranch.branch,
@@ -31,7 +31,7 @@ abstract final class RouterConfig {
 
   static final GoRouter router = GoRouter(
     debugLogDiagnostics: true,
-    initialLocation: RouterEnum.post.path,
+    initialLocation: RouterEnum.feed.path,
     routes: _routes,
   );
 }

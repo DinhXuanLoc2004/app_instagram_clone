@@ -2,10 +2,10 @@ import 'package:app_instagram_clone/cores/widgets/message_circle_custom_paint.da
 import 'package:flutter/material.dart';
 
 class IconMessageCircle extends StatelessWidget {
-  const IconMessageCircle({super.key, double? size})
-    : _size = size ?? _DEFAULT_SIZE;
+  const IconMessageCircle({super.key, double size = _SIZE_DEFAULT})
+    : _size = size;
 
-  static const double _DEFAULT_SIZE = 100;
+  static const double _SIZE_DEFAULT = 24;
 
   final double _size;
 
