@@ -12,7 +12,7 @@ abstract final class RouterConfig {
   static final List<StatefulShellBranch> _listBranchs = [
     FeedBranch.branch,
     SearchBranchs.branch,
-    AddMediaBranch.branch,
+    // AddMediaBranch.branch,
     ReelBranch.branch,
     ProfileBranch.branch,
   ];

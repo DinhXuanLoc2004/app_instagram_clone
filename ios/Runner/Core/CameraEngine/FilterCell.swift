@@ -15,14 +15,11 @@ class FilterCell: UICollectionViewCell {
     static let identifier: String = "FilterPickerCell"
     
     // MARK: - Private properties
-    private let size: CGFloat
-    
     private var imageView: UIImageView!
     
     // MARK: - Init
-    init(size: CGFloat) {
-        self.size = size
-        super.init(frame: .zero)
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         setupUI()
     }
     
@@ -35,7 +32,7 @@ class FilterCell: UICollectionViewCell {
         imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
-        imageView.layer.cornerRadius = size/2
+        imageView.layer.cornerRadius = FilterPickerController.sizeCell/2
         
         contentView.addSubview(imageView)
         imageView.frame = contentView.bounds

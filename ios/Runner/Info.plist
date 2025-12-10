@@ -2,6 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Xin quyen thu vien anh</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Xin quyen Microphone</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Xin quyen Camera</string>
 	<key>DEEPAR_SDK_KEY</key>
 	<string>$(DEEPAR_SDK_KEY)</string>
 	<key>CFBundleLocalizations</key>

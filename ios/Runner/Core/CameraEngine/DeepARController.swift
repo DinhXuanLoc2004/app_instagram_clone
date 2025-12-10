@@ -31,6 +31,8 @@ class DeepARController: UIViewController {
         setupDeepAR()
         setupFilterPicker()
         setupAutoLayout()
+        
+        cameraController.startCamera(withAudio: true)
     }
     
 }
@@ -67,7 +69,7 @@ extension DeepARController {
             arView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             filterPicker.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             filterPicker.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            filterPicker.view.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -marginBottomFilterPicker)
+            filterPicker.view.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
 }

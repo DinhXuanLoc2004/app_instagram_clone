@@ -12,8 +12,10 @@ class FilterPickerController: UIViewController {
     // MARK: - Delegate property
     weak var delegate: FilterPickerDelegate?
     
+    // MARK: - Static properties
+    static let sizeCell: CGFloat = 80
+    
     // MARK: - Private properties
-    private let sizeCell: CGFloat = 80
     private let sizeButtonSnap: CGFloat = 80 + 13
     private let borderWidthButtonSnap: CGFloat = 4
     private let spacing: CGFloat = 40
@@ -84,7 +86,7 @@ extension FilterPickerController {
     }
     
     private func createLayoutCollectionView() -> UICollectionViewCompositionalLayout {
-        let itemSize = NSCollectionLayoutSize(widthDimension: .absolute(self.sizeCell), heightDimension: .absolute(self.sizeCell))
+        let itemSize = NSCollectionLayoutSize(widthDimension: .absolute(FilterPickerController.sizeCell), heightDimension: .absolute(FilterPickerController.sizeCell))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         
         let groupSize = itemSize
@@ -110,7 +112,7 @@ extension FilterPickerController {
     
     private func setupCollectionView() {
         let layout = createLayoutCollectionView()
-        collectionView = UICollectionView(frame: .zero)
+        collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.dataSource = self
         collectionView.register(FilterCell.self, forCellWithReuseIdentifier: FilterCell.identifier)
         collectionView.decelerationRate = .normal
@@ -129,10 +131,10 @@ extension FilterPickerController {
         NSLayoutConstraint.activate([
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            collectionView.heightAnchor.constraint(equalToConstant: sizeCell),
+            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
+            collectionView.heightAnchor.constraint(equalToConstant: FilterPickerController.sizeCell),
             buttonSnap.leadingAnchor.constraint(equalTo: view.centerXAnchor, constant: -(sizeButtonSnap / 2)),
-            buttonSnap.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -((sizeButtonSnap - sizeCell) / 2)),
+            buttonSnap.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -(20 - ((sizeButtonSnap - FilterPickerController.sizeCell) / 2))),
             buttonSnap.heightAnchor.constraint(equalToConstant: sizeButtonSnap),
             buttonSnap.widthAnchor.constraint(equalToConstant: sizeButtonSnap)
         ])

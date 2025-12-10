@@ -1,3 +1,4 @@
+import 'package:app_instagram_clone/features/add_media/presentation/page/media_module.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:material_symbols_icons/symbols.dart';
@@ -57,7 +58,12 @@ class ScaffoldWithNavBar extends StatelessWidget {
     ];
   }
 
-  void _onTap(int indexedStack) {
+  void _onTap(int indexedStack) async {
+    if (indexedStack == 2) {
+      await MediaModule.openMediaModule();
+      return;
+    }
+
     _navigationShell.goBranch(indexedStack);
   }
 

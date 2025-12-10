@@ -6,6 +6,6 @@ abstract final class AddMediaRoute {
   static final RouteBase route = GoRoute(
     path: RouterEnum.addMedia.path,
     name: RouterEnum.addMedia.name,
-    builder: (context, state) => const AddMediaPage(),
+    // builder: (context, state) => const AddMediaPage(),
   );
 }
