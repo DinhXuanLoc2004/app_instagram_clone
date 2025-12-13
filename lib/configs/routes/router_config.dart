@@ -1,4 +1,3 @@
-import 'package:app_instagram_clone/configs/routes/branchs/add_media_branch.dart';
 import 'package:app_instagram_clone/configs/routes/branchs/feed_branch.dart';
 import 'package:app_instagram_clone/configs/routes/branchs/profile_branch.dart';
 import 'package:app_instagram_clone/configs/routes/branchs/reel_branch.dart';
@@ -12,7 +11,6 @@ abstract final class RouterConfig {
   static final List<StatefulShellBranch> _listBranchs = [
     FeedBranch.branch,
     SearchBranchs.branch,
-    // AddMediaBranch.branch,
     ReelBranch.branch,
     ProfileBranch.branch,
   ];

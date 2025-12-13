@@ -23,6 +23,7 @@ class MediaController: UIViewController {
     // MARK: - Private methods
     private func setupUI(){
         deepARController = DeepARController()
+        deepARController.delegate = self
         addChild(deepARController)
         
         bottomControllerBar = BottomControllerBar()
@@ -48,6 +49,12 @@ class MediaController: UIViewController {
         deepARController.didMove(toParent: self)
     }
     
+}
+
+extension MediaController: DeepARControllerDelegate {
+    func dismiss(_: DeepARController) {
+        dismiss(animated: true)
+    }
 }
 
 extension MediaController: BottomControllerDelegate {

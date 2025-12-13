@@ -153,6 +153,7 @@ extension FilterPickerController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FilterCell.identifier, for: indexPath) as! FilterCell
+        cell.delegate = self
         cell.setImage(named: Effects[indexPath.item].preview)
         cell.isUserInteractionEnabled = (indexPath.item == currentIndex)
         return cell
