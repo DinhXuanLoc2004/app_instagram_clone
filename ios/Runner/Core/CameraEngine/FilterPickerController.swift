@@ -161,7 +161,7 @@ extension FilterPickerController: UICollectionViewDataSource {
 }
 
 extension FilterPickerController: FilterCellDelegate {
-    func onTapped(_ cell: FilterCell) {
-        print("Cap...!")
+    func onTapped(_: FilterCell) {
+        delegate?.takePhoto(self)
     }
 }

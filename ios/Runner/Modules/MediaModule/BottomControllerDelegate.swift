@@ -1,3 +1,3 @@
 protocol BottomControllerDelegate: AnyObject {
-    func onSwitchCamera(_ bar: BottomControllerBar)
+    func onSwitchCamera(_: BottomControllerBar)
 }

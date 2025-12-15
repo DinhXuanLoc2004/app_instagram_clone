@@ -19,10 +19,12 @@ class DeepARController: UIViewController {
     
     private var filterPicker: FilterPickerController!
     
+    private var deepARState: DeepARState = .unInit
     private let LICENSE_KEY = "08f75fda2dd3aa9faf005c89b1bc30dc20b8cfc91a2fd23ea8bc845fcd18b19799de20ffb628025d"
     private var deepAR: DeepAR!
     private var arView: UIView!
     private var cameraController: CameraController!
+    private var cameraPosition: AVCaptureDevice.Position = .front
     
     private var effectIndex = 0
     private var effectPaths: [String?] {
@@ -32,6 +34,8 @@ class DeepARController: UIViewController {
     // MARK: - Life cycles
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        print("viewDidLoad DeepARController...!")
 
         view.layer.cornerRadius = 20
         view.clipsToBounds = true
@@ -43,11 +47,23 @@ class DeepARController: UIViewController {
         addSubViews()
         setupAutoLayout()
         didMoves()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        print("viewWillAppear DeepARController...!")
+        
+        if deepARState == .shutdowned {
+            setupDeepAR()
+            setupTopBarController()
+            addSubViews()
+            setupAutoLayout()
+        }
         
         startCamera()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
+        print("viewWillDisappear DeepARController...!")
         distroyDeepAR()
     }
             
@@ -76,6 +92,7 @@ extension DeepARController {
     private func setupDeepAR() {
         print("deepAR: \(String(describing: deepAR))")
         deepAR = DeepAR()
+        deepARState = .running
         deepAR.delegate = self
         deepAR.setLicenseKey(LICENSE_KEY)
         
@@ -92,6 +109,7 @@ extension DeepARController {
     }
     
     private func startCamera(){
+        cameraController.position = cameraPosition
         cameraController.startCamera(withAudio: true)
     }
     
@@ -132,24 +150,46 @@ extension DeepARController {
         cameraController.stopAudio()
         deepAR.shutdown()
     }
-    
+        
     // MARK: - Objective methods
     @objc func onTapDismissButton(){
         delegate?.dismiss(self)
+    }
+    
+    // MARK: - Public methods
+    func didTapSwitchCamera(){
+        if cameraPosition == .front {
+            cameraController.position = .back
+            cameraPosition = .back
+        } else {
+            cameraController.position = .front
+            cameraPosition = .front
+        }
     }
 }
 
 extension DeepARController: DeepARDelegate{
     func didFinishShutdown() {
         print("didFinishShutdown...!")
+        deepARState = .shutdowned
+    }
+    
+    func didTakeScreenshot(_ screenshot: UIImage!) {
+        guard let image = screenshot else {return}
+        delegate?.takePhoto(self, image: image)
     }
 }
 
 extension DeepARController: FilterPickerDelegate{
     // MARK: - Implement FilterPickerDelegate
-    func picker(_ controller: FilterPickerController, didSelect index: Int) {
+    func picker(_: FilterPickerController, didSelect index: Int) {
         if let path = effectPaths[index] {
             deepAR.switchEffect(withSlot: "effect", path: path)
         }
+    }
+    
+    func takePhoto(_: FilterPickerController) {
+        print("take photo...!")
+        deepAR.takeScreenshot()
     }
 }

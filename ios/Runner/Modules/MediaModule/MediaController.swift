@@ -27,6 +27,7 @@ class MediaController: UIViewController {
         addChild(deepARController)
         
         bottomControllerBar = BottomControllerBar()
+        bottomControllerBar.delegate = self
         
         stackContrainer = UIStackView()
         stackContrainer.addArrangedSubview(deepARController.view)
@@ -38,6 +39,8 @@ class MediaController: UIViewController {
         
         view.addSubview(stackContrainer)
         view.backgroundColor = .black
+        
+        print("Safe area top anchor for Media controller:: \(view.safeAreaLayoutGuide.topAnchor)")
         
         NSLayoutConstraint.activate([
             stackContrainer.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -55,10 +58,19 @@ extension MediaController: DeepARControllerDelegate {
     func dismiss(_: DeepARController) {
         dismiss(animated: true)
     }
+    
+    func takePhoto(_: DeepARController, image: UIImage) {
+        let editorController = EditorController(image: image)
+        let nav = UINavigationController(rootViewController: editorController)
+        nav.modalPresentationStyle = .fullScreen
+        nav.setNavigationBarHidden(true, animated: false)
+        
+        present(nav, animated: true)
+    }
 }
 
 extension MediaController: BottomControllerDelegate {
-    func onSwitchCamera(_ bar: BottomControllerBar) {
-        print("đổi camera nè..!")
+    func onSwitchCamera(_: BottomControllerBar) {
+        deepARController.didTapSwitchCamera()
     }
 }
