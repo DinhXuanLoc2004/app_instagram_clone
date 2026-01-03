@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol FilterCellDelegate: AnyObject {
+    func onTapped(_ cell: FilterCell)
+}
+
 class FilterCell: UICollectionViewCell {
     // MARK: - Delegate property
     weak var delegate: FilterCellDelegate?
@@ -32,7 +36,7 @@ class FilterCell: UICollectionViewCell {
         imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
-        imageView.layer.cornerRadius = FilterPickerController.sizeCell/2
+        imageView.layer.cornerRadius = FilterPicker.sizeCell/2
         
         contentView.addSubview(imageView)
         imageView.frame = contentView.bounds

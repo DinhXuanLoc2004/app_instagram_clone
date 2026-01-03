@@ -7,6 +7,11 @@
 
 import UIKit
 
+protocol TopActionBarDelegate: AnyObject {
+    func dismiss(_: TopActionBar)
+    func addText(_: TopActionBar)
+}
+
 class TopActionBar: UIView {
     
     // MARK: - Delegate property
@@ -60,6 +65,7 @@ class TopActionBar: UIView {
     
     private func addTargets(){
         dismissButton.addTarget(self, action: #selector(didTapDismiss), for: .touchUpInside)
+        addTextButton.addTarget(self, action: #selector(addText), for: .touchUpInside)
     }
     
     private func addSubviews(){
@@ -81,5 +87,24 @@ class TopActionBar: UIView {
     @objc private func didTapDismiss(){
         delegate?.dismiss(self)
     }
+    
+    @objc private func addText(){
+        delegate?.addText(self)
+    }
 
+    // MARK: - public methods
+    func show() {
+        CanvasController.animation {
+            self.transform = .identity
+        }
+        
+        guard let superview = superview else {return}
+        superview.bringSubviewToFront(self)
+    }
+    
+    func hidden() {
+        CanvasController.animation {
+            self.transform = CGAffineTransform(translationX: 0, y: -60)
+        }
+    }
 }

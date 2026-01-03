@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol BottomControllerDelegate: AnyObject {
+    func onSwitchCamera(_: BottomControllerBar)
+}
+
 class BottomControllerBar: UIView {
 
     // MARK: - Delegate property
@@ -15,7 +19,7 @@ class BottomControllerBar: UIView {
     // MARK: - Private properties
     private let sizeSelectImageButton: CGFloat = 50
     private let marginHorizontal: CGFloat = 16
-    private let heightStackContainer: CGFloat = 115
+    private let heightStackContainer: CGFloat = 100
     
     private var selectImageButton: UIView!
     private var storyLabel: UILabel!

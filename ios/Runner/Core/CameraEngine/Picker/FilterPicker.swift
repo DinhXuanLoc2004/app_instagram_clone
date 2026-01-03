@@ -7,16 +7,22 @@
 
 import UIKit
 
-class FilterPickerController: UIViewController {
+protocol FilterPickerDelegate: AnyObject {
+    func picker(_: FilterPicker, didSelect index: Int)
+    func takePhoto(_: FilterPicker)
+}
+
+class FilterPicker: UIView {
     
     // MARK: - Delegate property
     weak var delegate: FilterPickerDelegate?
     
     // MARK: - Static properties
+    static let height: CGFloat = FilterPicker.sizeCell + 13
     static let sizeCell: CGFloat = 80
     
     // MARK: - Private properties
-    private let sizeButtonSnap: CGFloat = 80 + 13
+    private let sizeButtonSnap: CGFloat = FilterPicker.height
     private let borderWidthButtonSnap: CGFloat = 4
     private let spacing: CGFloat = 40
     private let scaleFactor = 0.8 // số càng lớn thì cell càng xa center sẽ càng nhỏ
@@ -27,20 +33,23 @@ class FilterPickerController: UIViewController {
     private var currentIndex: Int = 1
     
     private var buttonSnap: UIView!
-
-    // MARK: - Life cycles
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
+    
+    // MARK: Init
+    init(){
+        super.init(frame: .zero)
+        
         setupUI()
         setupCollectionView()
         addSubViews()
         setupAutoLayout()
     }
     
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 }
 
-extension FilterPickerController {
+extension FilterPicker {
     // MARK: - Private methods
     private func picked(filterIndex: Int) {
         delegate?.picker(self, didSelect: filterIndex)
@@ -86,7 +95,7 @@ extension FilterPickerController {
     }
     
     private func createLayoutCollectionView() -> UICollectionViewCompositionalLayout {
-        let itemSize = NSCollectionLayoutSize(widthDimension: .absolute(FilterPickerController.sizeCell), heightDimension: .absolute(FilterPickerController.sizeCell))
+        let itemSize = NSCollectionLayoutSize(widthDimension: .absolute(FilterPicker.sizeCell), heightDimension: .absolute(FilterPicker.sizeCell))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         
         let groupSize = itemSize
@@ -120,8 +129,8 @@ extension FilterPickerController {
     }
     
     private func addSubViews() {
-        view.addSubview(collectionView)
-        view.addSubview(buttonSnap)
+        addSubview(collectionView)
+        addSubview(buttonSnap)
     }
     
     private func setupAutoLayout(){
@@ -129,19 +138,19 @@ extension FilterPickerController {
         buttonSnap.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
-            collectionView.heightAnchor.constraint(equalToConstant: FilterPickerController.sizeCell),
-            buttonSnap.leadingAnchor.constraint(equalTo: view.centerXAnchor, constant: -(sizeButtonSnap / 2)),
-            buttonSnap.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -(20 - ((sizeButtonSnap - FilterPickerController.sizeCell) / 2))),
-            buttonSnap.heightAnchor.constraint(equalToConstant: sizeButtonSnap),
-            buttonSnap.widthAnchor.constraint(equalToConstant: sizeButtonSnap)
+            collectionView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            collectionView.centerYAnchor.constraint(equalTo: centerYAnchor),
+            collectionView.heightAnchor.constraint(equalToConstant: FilterPicker.sizeCell),
+            buttonSnap.centerXAnchor.constraint(equalTo: centerXAnchor),
+            buttonSnap.centerYAnchor.constraint(equalTo: centerYAnchor),
+            buttonSnap.heightAnchor.constraint(equalToConstant: FilterPicker.height),
+            buttonSnap.widthAnchor.constraint(equalToConstant: FilterPicker.height)
         ])
     }
 }
 
-extension FilterPickerController: UICollectionViewDataSource {
+extension FilterPicker: UICollectionViewDataSource {
     // MARK: - Datasource methods
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
@@ -160,7 +169,7 @@ extension FilterPickerController: UICollectionViewDataSource {
     }
 }
 
-extension FilterPickerController: FilterCellDelegate {
+extension FilterPicker: FilterCellDelegate {
     func onTapped(_: FilterCell) {
         delegate?.takePhoto(self)
     }

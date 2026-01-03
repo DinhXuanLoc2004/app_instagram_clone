@@ -8,16 +8,27 @@
 import UIKit
 import DeepAR
 
-class DeepARController: UIViewController {
+enum DeepARState {
+    case unInit
+    case running
+    case shutdowned
+}
+
+protocol CameraUseDeepARControllerDelegate: AnyObject {
+    func dismiss(_: CameraUseDeepARController)
+    func takePhoto(_: CameraUseDeepARController, image: UIImage)
+}
+
+class CameraUseDeepARController: UIViewController {
     // MARK: - Delegate property
-    weak var delegate: DeepARControllerDelegate?
+    weak var delegate: CameraUseDeepARControllerDelegate?
     
     // MARK: - Private properties
     private var dismissButton: UIButton!
     private var boltButton: UIButton!
     private var stackTopContainer: UIStackView!
     
-    private var filterPicker: FilterPickerController!
+    private var filterPicker: FilterPicker!
     
     private var deepARState: DeepARState = .unInit
     private let LICENSE_KEY = "08f75fda2dd3aa9faf005c89b1bc30dc20b8cfc91a2fd23ea8bc845fcd18b19799de20ffb628025d"
@@ -43,10 +54,8 @@ class DeepARController: UIViewController {
         setupDeepAR()
         setupFilterPicker()
         setupTopBarController()
-        addChilds()
         addSubViews()
         setupAutoLayout()
-        didMoves()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -69,12 +78,13 @@ class DeepARController: UIViewController {
             
 }
 
-extension DeepARController {
+extension CameraUseDeepARController {
     // MARK: - Private methods
     private func setupTopBarController(){
         dismissButton = UIButton(type: .system)
         dismissButton.tintColor = .white
-        dismissButton.setImage(UIImage(systemName: "x.circle"), for: .normal)
+        let config = UIImage.SymbolConfiguration(pointSize: 22, weight: .regular)
+        dismissButton.setImage(UIImage(systemName: "xmark", withConfiguration: config), for: .normal)
         dismissButton.addTarget(self, action: #selector(onTapDismissButton), for: .allTouchEvents)
         
         boltButton = UIButton(type: .system)
@@ -114,37 +124,31 @@ extension DeepARController {
     }
     
     private func setupFilterPicker(){
-        filterPicker = FilterPickerController()
+        filterPicker = FilterPicker()
         filterPicker.delegate = self
     }
-    
-    private func addChilds(){
-        addChild(filterPicker)
-    }
-    
+        
     private func addSubViews(){
         view.addSubview(arView)
-        view.addSubview(filterPicker.view)
         view.addSubview(stackTopContainer)
+        view.addSubview(filterPicker)
     }
     
     private func setupAutoLayout(){
         stackTopContainer.translatesAutoresizingMaskIntoConstraints = false
+        filterPicker.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            filterPicker.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            filterPicker.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            filterPicker.view.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            filterPicker.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            filterPicker.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            filterPicker.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
+            filterPicker.heightAnchor.constraint(equalToConstant: FilterPicker.height),
             stackTopContainer.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
             stackTopContainer.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
             stackTopContainer.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
         ])
     }
-    
-    private func didMoves(){
-        filterPicker.didMove(toParent: self)
-    }
-    
+        
     private func distroyDeepAR(){
         cameraController.stopCamera()
         cameraController.stopAudio()
@@ -168,7 +172,7 @@ extension DeepARController {
     }
 }
 
-extension DeepARController: DeepARDelegate{
+extension CameraUseDeepARController: DeepARDelegate{
     func didFinishShutdown() {
         print("didFinishShutdown...!")
         deepARState = .shutdowned
@@ -180,15 +184,15 @@ extension DeepARController: DeepARDelegate{
     }
 }
 
-extension DeepARController: FilterPickerDelegate{
+extension CameraUseDeepARController: FilterPickerDelegate{
     // MARK: - Implement FilterPickerDelegate
-    func picker(_: FilterPickerController, didSelect index: Int) {
+    func picker(_: FilterPicker, didSelect index: Int) {
         if let path = effectPaths[index] {
             deepAR.switchEffect(withSlot: "effect", path: path)
         }
     }
     
-    func takePhoto(_: FilterPickerController) {
+    func takePhoto(_: FilterPicker) {
         print("take photo...!")
         deepAR.takeScreenshot()
     }

@@ -10,7 +10,7 @@ import UIKit
 class MediaController: UIViewController {
     
     // MARK: - Private properties
-    private var deepARController: DeepARController!
+    private var deepARController: CameraUseDeepARController!
     private var bottomControllerBar: BottomControllerBar!
     private var stackContrainer: UIStackView!
 
@@ -22,7 +22,7 @@ class MediaController: UIViewController {
     
     // MARK: - Private methods
     private func setupUI(){
-        deepARController = DeepARController()
+        deepARController = CameraUseDeepARController()
         deepARController.delegate = self
         addChild(deepARController)
         
@@ -40,8 +40,6 @@ class MediaController: UIViewController {
         view.addSubview(stackContrainer)
         view.backgroundColor = .black
         
-        print("Safe area top anchor for Media controller:: \(view.safeAreaLayoutGuide.topAnchor)")
-        
         NSLayoutConstraint.activate([
             stackContrainer.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             stackContrainer.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -54,12 +52,12 @@ class MediaController: UIViewController {
     
 }
 
-extension MediaController: DeepARControllerDelegate {
-    func dismiss(_: DeepARController) {
+extension MediaController: CameraUseDeepARControllerDelegate {
+    func dismiss(_: CameraUseDeepARController) {
         dismiss(animated: true)
     }
     
-    func takePhoto(_: DeepARController, image: UIImage) {
+    func takePhoto(_: CameraUseDeepARController, image: UIImage) {
         let editorController = EditorController(image: image)
         let nav = UINavigationController(rootViewController: editorController)
         nav.modalPresentationStyle = .fullScreen

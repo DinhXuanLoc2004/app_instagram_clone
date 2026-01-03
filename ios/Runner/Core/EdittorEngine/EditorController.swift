@@ -68,4 +68,12 @@ extension EditorController: CanvasControllerDelegate {
         print("Dismiss Editor controller...!")
         dismiss(animated: true)
     }
+    
+    func didBeginHightlightInteractive(_: CanvasController) {
+        bottomActionBar.showSubLongPress()
+    }
+    
+    func didEndHightlightInteractive(_: CanvasController) {
+        bottomActionBar.hiddenSubLongPress()
+    }
 }
