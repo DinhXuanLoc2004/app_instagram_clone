@@ -1,15 +1,15 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'successful_response_wrapper.dart';
+part of 'success_wrapper.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-SuccessfulResponseWrapper<T> _$SuccessfulResponseWrapperFromJson<T>(
+SuccessWrapper<T> _$SuccessWrapperFromJson<T>(
   Map<String, dynamic> json,
   T Function(Object? json) fromJsonT,
-) => SuccessfulResponseWrapper<T>(
+) => SuccessWrapper<T>(
   status: (json['status'] as num).toInt(),
   message: json['message'] as String,
   metadata: fromJsonT(json['metadata']),

@@ -1,18 +1,18 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'exception_response.g.dart';
+part 'exception_wrapper.g.dart';
 
 @JsonSerializable(createToJson: false)
-class ExceptionResponse {
+class ExceptionWrapper {
   final int status;
   final String message;
   final String error;
 
-  const ExceptionResponse({
+  const ExceptionWrapper({
     required this.status,
     required this.message,
     required this.error
   });
 
-  factory ExceptionResponse.fromJson(Map<String, dynamic> json) => _$ExceptionResponseFromJson(json);
+  factory ExceptionWrapper.fromJson(Map<String, dynamic> json) => _$ExceptionWrapperFromJson(json);
 }

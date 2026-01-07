@@ -1,13 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'exception_response.dart';
+part of 'exception_wrapper.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-ExceptionResponse _$ExceptionResponseFromJson(Map<String, dynamic> json) =>
-    ExceptionResponse(
+ExceptionWrapper _$ExceptionWrapperFromJson(Map<String, dynamic> json) =>
+    ExceptionWrapper(
       status: (json['status'] as num).toInt(),
       message: json['message'] as String,
       error: json['error'] as String,

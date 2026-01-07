@@ -1,5 +1,8 @@
+import 'dart:ffi';
+import 'dart:io';
+
 import 'package:app_instagram_clone/configs/logger/log.dart';
-import 'package:app_instagram_clone/configs/network/responses/exception/exception_response.dart';
+import 'package:app_instagram_clone/configs/network/responses/exception/exception_wrapper.dart';
 import 'package:app_instagram_clone/cores/error/custom_exceptions.dart';
 import 'package:app_instagram_clone/cores/error/failure_type.dart';
 import 'package:dio/dio.dart';
@@ -42,12 +45,7 @@ abstract class Failure with _$Failure {
           code: error?.code,
           stackTrace: e.stackTrace,
         ),
-        DioExceptionType.badResponse => Failure(
-          failureType: FailureType.badResponse,
-          message: error?.message ?? e.toString(),
-          code: error?.code,
-          stackTrace: e.stackTrace,
-        ),
+        DioExceptionType.badResponse => _mapBadResponseToFailed(error),
         DioExceptionType.badCertificate => Failure(
           failureType: FailureType.badCartificate,
           message: error?.message ?? e.toString(),
@@ -73,6 +71,7 @@ abstract class Failure with _$Failure {
     }
 
     if (e is CustomExceptions) {
+      Log.debug('CustomExceptions');
       return switch (e) {
         ParsingException() => Failure(
           failureType: FailureType.parsing,
@@ -125,12 +124,49 @@ abstract class Failure with _$Failure {
     return Failure(failureType: FailureType.unknown, message: e.toString());
   }
 
+  static Failure _mapBadResponseToFailed(
+    ({String message, String? code})? error,
+  ) {
+    Log.debug('error: $error');
+    if (error == null) {
+      return const Failure(
+        failureType: FailureType.unknown,
+        message: 'Unknown',
+      );
+    }
+
+    final status = int.tryParse(error.code ?? '') ?? 500;
+    Log.debug('status: $status');
+
+    if (status == HttpStatus.unauthorized) {
+      return Failure(
+        failureType: FailureType.unauthorized,
+        message: error.message,
+        code: status.toString(),
+      );
+    }
+
+    if (status == HttpStatus.badRequest) {
+      return Failure(
+        failureType: FailureType.badRequest,
+        message: error.message,
+        code: status.toString(),
+      );
+    }
+
+    return Failure(
+      failureType: FailureType.unknown,
+      message: error.message,
+      code: status.toString(),
+    );
+  }
+
   static ({String? code, String message})? _parseError(Response? response) {
     if (response == null) return null;
 
     try {
       if (response.data is Map<String, dynamic>) {
-        final ExceptionResponse exceptionResponse = ExceptionResponse.fromJson(
+        final ExceptionWrapper exceptionResponse = ExceptionWrapper.fromJson(
           response.data as Map<String, dynamic>,
         );
         return (

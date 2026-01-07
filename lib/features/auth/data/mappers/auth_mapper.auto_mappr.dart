@@ -10,11 +10,12 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_mappr_annotation/auto_mappr_annotation.dart' as _i1;
 
-import '../../../../cores/storage/model/auth_token_model.dart' as _i6;
 import '../../domain/entities/auth_token_entity.dart' as _i5;
 import '../../domain/ports/inputs/sign-in/extendtions/sign_in_with_userpass_input.dart'
     as _i3;
+import '../../domain/ports/inputs/sign_up_input.dart' as _i6;
 import '../DTOs/requests/sign_in_with_userpass_request.dart' as _i2;
+import '../DTOs/requests/sign_up_request.dart' as _i7;
 import '../DTOs/responses/auth_token_response.dart' as _i4;
 
 /// {@template package:app_instagram_clone/features/auth/data/mappers/auth_mapper.dart}
@@ -23,7 +24,8 @@ import '../DTOs/responses/auth_token_response.dart' as _i4;
 /// - `SignInWithUserpassInput` → `SignInWithUserpassRequest`.
 /// - `AuthTokenResponse` → `AuthTokenEntity`.
 /// - `AuthTokenEntity` → `AuthTokenResponse`.
-/// - `AuthTokenEntity` → `AuthTokenModel`.
+/// - `SignUpInput` → `SignUpRequest`.
+/// - `SignUpRequest` → `SignUpInput`.
 /// {@endtemplate}
 class $AuthMapper implements _i1.AutoMapprInterface {
   const $AuthMapper();
@@ -62,10 +64,16 @@ class $AuthMapper implements _i1.AutoMapprInterface {
             targetTypeOf == _typeOf<_i4.AuthTokenResponse?>())) {
       return true;
     }
-    if ((sourceTypeOf == _typeOf<_i5.AuthTokenEntity>() ||
-            sourceTypeOf == _typeOf<_i5.AuthTokenEntity?>()) &&
-        (targetTypeOf == _typeOf<_i6.AuthTokenModel>() ||
-            targetTypeOf == _typeOf<_i6.AuthTokenModel?>())) {
+    if ((sourceTypeOf == _typeOf<_i6.SignUpInput>() ||
+            sourceTypeOf == _typeOf<_i6.SignUpInput?>()) &&
+        (targetTypeOf == _typeOf<_i7.SignUpRequest>() ||
+            targetTypeOf == _typeOf<_i7.SignUpRequest?>())) {
+      return true;
+    }
+    if ((sourceTypeOf == _typeOf<_i7.SignUpRequest>() ||
+            sourceTypeOf == _typeOf<_i7.SignUpRequest?>()) &&
+        (targetTypeOf == _typeOf<_i6.SignUpInput>() ||
+            targetTypeOf == _typeOf<_i6.SignUpInput?>())) {
       return true;
     }
     if (recursive) {
@@ -293,15 +301,27 @@ class $AuthMapper implements _i1.AutoMapprInterface {
           )
           as TARGET);
     }
-    if ((sourceTypeOf == _typeOf<_i5.AuthTokenEntity>() ||
-            sourceTypeOf == _typeOf<_i5.AuthTokenEntity?>()) &&
-        (targetTypeOf == _typeOf<_i6.AuthTokenModel>() ||
-            targetTypeOf == _typeOf<_i6.AuthTokenModel?>())) {
+    if ((sourceTypeOf == _typeOf<_i6.SignUpInput>() ||
+            sourceTypeOf == _typeOf<_i6.SignUpInput?>()) &&
+        (targetTypeOf == _typeOf<_i7.SignUpRequest>() ||
+            targetTypeOf == _typeOf<_i7.SignUpRequest?>())) {
       if (canReturnNull && model == null) {
         return null;
       }
-      return (_map__i5$AuthTokenEntity_To__i6$AuthTokenModel(
-            (model as _i5.AuthTokenEntity?),
+      return (_map__i6$SignUpInput_To__i7$SignUpRequest(
+            (model as _i6.SignUpInput?),
+          )
+          as TARGET);
+    }
+    if ((sourceTypeOf == _typeOf<_i7.SignUpRequest>() ||
+            sourceTypeOf == _typeOf<_i7.SignUpRequest?>()) &&
+        (targetTypeOf == _typeOf<_i6.SignUpInput>() ||
+            targetTypeOf == _typeOf<_i6.SignUpInput?>())) {
+      if (canReturnNull && model == null) {
+        return null;
+      }
+      return (_map__i7$SignUpRequest_To__i6$SignUpInput(
+            (model as _i7.SignUpRequest?),
           )
           as TARGET);
     }
@@ -378,6 +398,10 @@ class $AuthMapper implements _i1.AutoMapprInterface {
     return _i5.AuthTokenEntity(
       accessToken: model.accessToken,
       refreshToken: model.refreshToken,
+      accessTokenExpireAt: model.accessTokenExpireAt,
+      accessTokenExpireAtEpoch: model.accessTokenExpireAtEpoch,
+      refreshTokenExpireAt: model.refreshTokenExpireAt,
+      refreshTokenExpireAtEpoch: model.refreshTokenExpireAtEpoch,
     );
   }
 
@@ -394,22 +418,36 @@ class $AuthMapper implements _i1.AutoMapprInterface {
     return _i4.AuthTokenResponse(
       accessToken: model.accessToken,
       refreshToken: model.refreshToken,
+      accessTokenExpireAt: model.accessTokenExpireAt,
+      accessTokenExpireAtEpoch: model.accessTokenExpireAtEpoch,
+      refreshTokenExpireAt: model.refreshTokenExpireAt,
+      refreshTokenExpireAtEpoch: model.refreshTokenExpireAtEpoch,
     );
   }
 
-  _i6.AuthTokenModel _map__i5$AuthTokenEntity_To__i6$AuthTokenModel(
-    _i5.AuthTokenEntity? input,
+  _i7.SignUpRequest _map__i6$SignUpInput_To__i7$SignUpRequest(
+    _i6.SignUpInput? input,
   ) {
     final model = input;
     if (model == null) {
       throw Exception(
-        r'Mapping AuthTokenEntity → AuthTokenModel failed because AuthTokenEntity was null, and no default value was provided. '
-        r'Consider setting the whenSourceIsNull parameter on the MapType<AuthTokenEntity, AuthTokenModel> to handle null values during mapping.',
+        r'Mapping SignUpInput → SignUpRequest failed because SignUpInput was null, and no default value was provided. '
+        r'Consider setting the whenSourceIsNull parameter on the MapType<SignUpInput, SignUpRequest> to handle null values during mapping.',
       );
     }
-    return _i6.AuthTokenModel(
-      accessToken: model.accessToken,
-      refreshToken: model.refreshToken,
-    );
+    return _i7.SignUpRequest(email: model.email, password: model.password);
+  }
+
+  _i6.SignUpInput _map__i7$SignUpRequest_To__i6$SignUpInput(
+    _i7.SignUpRequest? input,
+  ) {
+    final model = input;
+    if (model == null) {
+      throw Exception(
+        r'Mapping SignUpRequest → SignUpInput failed because SignUpRequest was null, and no default value was provided. '
+        r'Consider setting the whenSourceIsNull parameter on the MapType<SignUpRequest, SignUpInput> to handle null values during mapping.',
+      );
+    }
+    return _i6.SignUpInput(email: model.email, password: model.password);
   }
 }

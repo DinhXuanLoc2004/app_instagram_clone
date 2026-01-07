@@ -14,12 +14,15 @@ abstract class  LocaleKeys {
   static const auth_forgot_password = 'auth.forgot_password';
   static const auth_log_in = 'auth.log_in';
   static const auth_dont_have_an_account = 'auth.dont_have_an_account';
+  static const auth_already_have_an_account = 'auth.already_have_an_account';
   static const auth_sign_up = 'auth.sign_up';
   static const auth_validate_please_email = 'auth.validate_please_email';
   static const auth_validate_please_password = 'auth.validate_please_password';
   static const auth_validate_email = 'auth.validate_email';
   static const auth_validate_length_password = 'auth.validate_length_password';
   static const auth_validate_uppercase_password = 'auth.validate_uppercase_password';
+  static const auth_incorrect_sub = 'auth.incorrect_sub';
+  static const auth_email_already_exists_exception = 'auth.email_already_exists_exception';
   static const auth = 'auth';
   static const select_languege_title = 'select_languege.title';
   static const select_languege_english = 'select_languege.english';

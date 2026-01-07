@@ -1,46 +1,42 @@
 import 'package:app_instagram_clone/configs/dependency_injection/injection.dart';
-import 'package:app_instagram_clone/configs/logger/log.dart';
 import 'package:app_instagram_clone/configs/routes/auth_session.dart';
 import 'package:app_instagram_clone/configs/routes/router_enum.dart';
-import 'package:app_instagram_clone/configs/routes/router_names.dart';
 import 'package:app_instagram_clone/configs/translations/generated/locale_keys.g.dart';
 import 'package:app_instagram_clone/cores/error/failure_type.dart';
 import 'package:app_instagram_clone/cores/helpers/validations/email/abs_email_validate.dart';
 import 'package:app_instagram_clone/cores/helpers/validations/password/abs_password_validate.dart';
-import 'package:app_instagram_clone/features/auth/presentation/blocs/sign-in/sign_in_bloc.dart';
-import 'package:app_instagram_clone/features/auth/presentation/blocs/sign-in/sign_in_event.dart';
-import 'package:app_instagram_clone/features/auth/presentation/blocs/sign-in/sign_in_state.dart';
+import 'package:app_instagram_clone/cores/widgets/logos/logo_text_instagram.dart';
+import 'package:app_instagram_clone/features/auth/presentation/blocs/sign-up/sign_up_bloc.dart';
+import 'package:app_instagram_clone/features/auth/presentation/blocs/sign-up/sign_up_event.dart';
+import 'package:app_instagram_clone/features/auth/presentation/blocs/sign-up/sign_up_state.dart';
 import 'package:app_instagram_clone/features/auth/presentation/widgets/buttons/button_go_to_signin_or_signup.dart';
 import 'package:app_instagram_clone/features/auth/presentation/widgets/buttons/button_login_with_facebook.dart';
 import 'package:app_instagram_clone/features/auth/presentation/widgets/buttons/button_select_languege.dart';
 import 'package:app_instagram_clone/features/auth/presentation/widgets/form_auth.dart';
-import 'package:app_instagram_clone/cores/widgets/logos/logo_text_instagram.dart';
 import 'package:app_instagram_clone/features/auth/presentation/widgets/widget_or.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-class SignInPage extends StatefulWidget {
-  const SignInPage({super.key});
+class SignUpPage extends StatefulWidget {
+  const SignUpPage({super.key});
 
   @override
-  State<SignInPage> createState() => _SignInPageState();
+  State<SignUpPage> createState() => _SignUpPageState();
 }
 
-class _SignInPageState extends State<SignInPage> {
+class _SignUpPageState extends State<SignUpPage> {
+  final _authSession = getIt<AuthSession>();
   final AbsEmailValidate _emailValidate = getIt<AbsEmailValidate>();
   final AbsPasswordValidate _passwordValidate = getIt<AbsPasswordValidate>();
-  final AuthSession _authSession = getIt<AuthSession>();
 
-  final GlobalKey<FormState> _formKeySignInWithUserpass = GlobalKey();
+  final GlobalKey<FormState> _formKey = GlobalKey();
 
   late FocusNode _focusNodeEmail;
   late FocusNode _focusNodePassword;
   late TextEditingController _controllerEmail;
   late TextEditingController _controllerPassword;
-
-  var _isUnauthorized = false;
 
   @override
   void initState() {
@@ -48,11 +44,6 @@ class _SignInPageState extends State<SignInPage> {
     _focusNodeEmail = FocusNode();
     _focusNodePassword = FocusNode();
     _controllerEmail = TextEditingController();
-    _focusNodeEmail.addListener(() {
-      if (_focusNodeEmail.hasFocus) {
-        _focusNodePassword.unfocus();
-      }
-    });
     _controllerPassword = TextEditingController();
   }
 
@@ -65,31 +56,27 @@ class _SignInPageState extends State<SignInPage> {
     super.dispose();
   }
 
-  PreferredSizeWidget _buidAppBar() {
-    return AppBar(title: ButtonSelectLanguege(context: context));
-  }
+  var _isBadRequest = false;
 
-  void _signInWithUserpass(BuildContext context) {
-    context.read<SignInBloc>().add(
-      SignInWithUserpassEvent(
+  void _signUp() {
+    context.read<SignUpBloc>().add(
+      CreateAccountEvent(
         email: _controllerEmail.text,
         password: _controllerPassword.text,
       ),
     );
   }
 
-  void _onChangeText() {
-    if (_isUnauthorized) {
-      context.read<SignInBloc>().add(ClearUnauthorizedEvent());
+  void _onChangeTextEmail() {
+    if (_isBadRequest) {
+      context.read<SignUpBloc>().add(ClearBadRequestEvent());
     }
   }
-
-  void _forgotPassword() {}
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _buidAppBar(),
+      appBar: AppBar(title: ButtonSelectLanguege(context: context)),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 42),
@@ -105,45 +92,54 @@ class _SignInPageState extends State<SignInPage> {
                   const SizedBox(height: 35),
                   const WidgetOr(),
                   const SizedBox(height: 40),
-                  BlocConsumer<SignInBloc, SignInState>(
-                    listener: (context, state) {
-                      state.whenOrNull(success: _authSession.onAuthorized);
-                    },
-                    buildWhen: (previous, current) => true,
-                    builder: (BuildContext context, SignInState state) {
-                      final bool isLoading = state.maybeWhen(
+                  BlocConsumer<SignUpBloc, SignUpState>(
+                    builder: (context, state) {
+                      final isLoading = state.maybeWhen(
                         loading: () => true,
                         orElse: () => false,
                       );
-                      _isUnauthorized = state.maybeWhen(
+
+                      _isBadRequest = state.maybeWhen(
                         failure: (failureType, message) =>
-                            failureType == FailureType.unauthorized
+                            failureType == FailureType.badRequest
                             ? true
                             : false,
                         orElse: () => false,
                       );
                       return FormAuth(
+                        isSignInPage: false,
                         emailValidate: _emailValidate,
                         passwordValidate: _passwordValidate,
-                        actionAuth: () => _signInWithUserpass(context),
-                        actionForgotPassword: _forgotPassword,
+                        actionAuth: _signUp,
                         focusNodeEmail: _focusNodeEmail,
                         focusNodePassword: _focusNodePassword,
                         controllerEmail: _controllerEmail,
                         controllerPassword: _controllerPassword,
-                        onChangedEmail: (_) => _onChangeText(),
-                        onChangedPassword: (_) => _onChangeText(),
-                        formKey: _formKeySignInWithUserpass,
+                        onChangedEmail: (_) => _onChangeTextEmail(),
+                        formKey: _formKey,
                         isLoading: isLoading,
-                        isUnauthorized: _isUnauthorized,
+                        isBadRequest: _isBadRequest,
+                      );
+                    },
+                    listener: (context, state) {
+                      state.whenOrNull(
+                        success: _authSession.onAuthorized,
+                        failure: (failureType, message) {
+                          if (failureType == FailureType.badRequest) {
+                            WidgetsBinding.instance.addPostFrameCallback((_) {
+                              _focusNodeEmail.requestFocus();
+                              _focusNodePassword.unfocus();
+                            });
+                          }
+                        },
                       );
                     },
                   ),
                   const SizedBox(height: 30),
                   ButtonGoToSigninOrSignup(
-                    title: LocaleKeys.auth_dont_have_an_account.tr(),
-                    goToPage: LocaleKeys.auth_sign_up.tr(),
-                    action: () => context.goNamed(RouterEnum.signUp.name),
+                    title: LocaleKeys.auth_already_have_an_account.tr(),
+                    goToPage: LocaleKeys.auth_log_in.tr(),
+                    action: () => context.goNamed(RouterEnum.signIn.name),
                   ),
                 ],
               ),

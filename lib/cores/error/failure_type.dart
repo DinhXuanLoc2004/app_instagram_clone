@@ -1,6 +1,7 @@
 enum FailureType {
   timeout,
   badResponse,
+  badRequest,
   badCartificate,
   network,
   parsing,

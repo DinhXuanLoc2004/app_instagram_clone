@@ -5,17 +5,21 @@ class ButtonGoToSigninOrSignup extends StatelessWidget {
     super.key,
     required String title,
     required String goToPage,
-  }) : _goToPage = goToPage, _title = title;
+    required VoidCallback action,
+  }) : _goToPage = goToPage,
+       _title = title,
+       _action = action;
 
   final String _title;
   final String _goToPage;
+  final VoidCallback _action;
 
   @override
   Widget build(BuildContext context) {
     final ThemeData themeData = Theme.of(context);
     final ColorScheme colorScheme = themeData.colorScheme;
     return TextButton(
-      onPressed: () {},
+      onPressed: _action,
       child: RichText(
         text: TextSpan(
           text: _title,

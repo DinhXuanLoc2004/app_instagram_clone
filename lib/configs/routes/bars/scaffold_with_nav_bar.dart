@@ -58,13 +58,20 @@ class ScaffoldWithNavBar extends StatelessWidget {
     ];
   }
 
+  final indexForMediaModule = 2;
+
+  int get _currentIndex => _navigationShell.currentIndex >= indexForMediaModule
+      ? _navigationShell.currentIndex + 1
+      : _navigationShell.currentIndex;
+
   void _onTap(int indexedStack) async {
-    if (indexedStack == 2) {
+    if (indexedStack == indexForMediaModule) {
       await MediaModule.openMediaModule();
       return;
     }
 
-    _navigationShell.goBranch(indexedStack);
+    final branchIndex = indexedStack > indexForMediaModule ? indexedStack - 1 : indexedStack;
+    _navigationShell.goBranch(branchIndex);
   }
 
   Widget _buildBottomNavigationBar(BuildContext context) {
@@ -73,7 +80,7 @@ class ScaffoldWithNavBar extends StatelessWidget {
     return BottomNavigationBar(
       showUnselectedLabels: false,
       showSelectedLabels: false,
-      currentIndex: _navigationShell.currentIndex,
+      currentIndex: _currentIndex,
       onTap: _onTap,
       items: _buildBottomNavigationBarItems(colorScheme),
       type: BottomNavigationBarType.fixed,

@@ -6,6 +6,6 @@ abstract final class ProfileRoute {
   static final RouteBase route = GoRoute(
     path: RouterEnum.profile.path,
     name: RouterEnum.profile.name,
-    builder: (context, state) => const ProfilePage(),
+    builder: (context, state) => ProfilePage(),
   );
 }

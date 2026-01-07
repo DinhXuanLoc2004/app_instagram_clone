@@ -12,7 +12,7 @@ abstract class DioModule {
   ) {
     const String SCHEME = 'http';
     // const String HOST = 'localhost';
-    const String HOST = '192.168.1.7';
+    const String HOST = '192.168.1.8';
     const int PORT = 8888;
     const String BASE_PATH = 'api';
     const int VERSION = 1;

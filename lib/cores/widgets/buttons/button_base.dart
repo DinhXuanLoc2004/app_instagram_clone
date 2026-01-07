@@ -34,8 +34,8 @@ class ButtonBase extends StatelessWidget {
       ).merge(_style),
       child: _isLoading
           ? const SizedBox(
-              width: 50,
-              height: 50,
+              width: 30,
+              height: 30,
               child: CircularProgressIndicator(color: Colors.white),
             )
           : _child,

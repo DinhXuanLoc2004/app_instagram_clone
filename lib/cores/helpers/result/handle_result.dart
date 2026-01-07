@@ -37,7 +37,6 @@ abstract base class HandleResult<T> {
     } on Exception catch (e, stackTrace) {
       Log.error(e.toString());
       Log.error(stackTrace.toString());
-
       return Error(Failure.mapExceptionToFailure(e));
     }
   }

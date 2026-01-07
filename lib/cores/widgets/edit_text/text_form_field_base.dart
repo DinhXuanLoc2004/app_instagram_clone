@@ -1,3 +1,5 @@
+import 'package:app_instagram_clone/configs/translations/generated/locale_keys.g.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class TextFormFieldBase extends StatefulWidget {
@@ -10,13 +12,19 @@ class TextFormFieldBase extends StatefulWidget {
     required String? Function(String?) validator,
     AutovalidateMode autovalidateMode = AutovalidateMode.disabled,
     bool obscureText = false,
+    bool isUnauthorized = false,
+    bool isBadRequest = false,
+    Function(String)? onChanged
   }) : _obscureText = obscureText,
+       _isUnauthozried = isUnauthorized,
+       _isBadRequest = isBadRequest,
        _autovalidateMode = autovalidateMode,
        _validator = validator,
        _decoration = decoration,
        _hintText = hintText,
        _focusNode = focusNode,
-       _controller = controller;
+       _controller = controller,
+       _onChanged = onChanged;
 
   final TextEditingController _controller;
   final FocusNode _focusNode;
@@ -25,6 +33,9 @@ class TextFormFieldBase extends StatefulWidget {
   final FormFieldValidator<String> _validator;
   final AutovalidateMode _autovalidateMode;
   final bool _obscureText;
+  final bool _isUnauthozried;
+  final bool _isBadRequest;
+  final Function(String)? _onChanged;
 
   @override
   State<TextFormFieldBase> createState() => _TextFormFieldBaseState();
@@ -69,7 +80,15 @@ class _TextFormFieldBaseState extends State<TextFormFieldBase> {
       focusedBorder: _borderDefault(colorScheme),
       errorBorder: _borderError(colorScheme),
       focusedErrorBorder: _borderError(colorScheme),
-      errorStyle: const TextStyle(fontSize: 13),
+      errorText:
+          widget._isUnauthozried && widget._controller.text.trim().isNotEmpty && !widget._isBadRequest
+          ? ''
+          : widget._isBadRequest && widget._controller.text.trim().isNotEmpty && !widget._isUnauthozried
+          ? LocaleKeys.auth_email_already_exists_exception.tr()
+          : null,
+      errorStyle: widget._isUnauthozried && !widget._isBadRequest
+          ? const TextStyle(height: 0, fontSize: 0)
+          : const TextStyle(fontSize: 13),
       errorMaxLines: 3,
       suffixIcon: widget._obscureText ? _buildIconButtonObscured() : null,
     );
@@ -86,6 +105,7 @@ class _TextFormFieldBaseState extends State<TextFormFieldBase> {
       validator: widget._validator,
       autovalidateMode: widget._autovalidateMode,
       obscureText: widget._obscureText ? _isObscured : false,
+      onChanged: widget._onChanged,
     );
   }
 }

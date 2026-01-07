@@ -20,7 +20,7 @@ class _AuthDatasourceRemote implements AuthDatasourceRemote {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<SuccessfulResponseWrapper<AuthTokenResponse>> signInWithUserpass({
+  Future<SuccessWrapper<AuthTokenResponse>> signInWithUserpass({
     required SignInWithUserpassRequest body,
     Map<String, dynamic>? extras,
   }) async {
@@ -31,23 +31,20 @@ class _AuthDatasourceRemote implements AuthDatasourceRemote {
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(body.toJson());
-    final _options =
-        _setStreamType<SuccessfulResponseWrapper<AuthTokenResponse>>(
-          Options(method: 'POST', headers: _headers, extra: _extra)
-              .compose(
-                _dio.options,
-                '/auth/sign-in/userpass',
-                queryParameters: queryParameters,
-                data: _data,
-              )
-              .copyWith(
-                baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl),
-              ),
-        );
+    final _options = _setStreamType<SuccessWrapper<AuthTokenResponse>>(
+      Options(method: 'POST', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            '/auth/sign-in/userpass',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late SuccessfulResponseWrapper<AuthTokenResponse> _value;
+    late SuccessWrapper<AuthTokenResponse> _value;
     try {
-      _value = SuccessfulResponseWrapper<AuthTokenResponse>.fromJson(
+      _value = SuccessWrapper<AuthTokenResponse>.fromJson(
         _result.data!,
         (json) => AuthTokenResponse.fromJson(json as Map<String, dynamic>),
       );
@@ -56,6 +53,67 @@ class _AuthDatasourceRemote implements AuthDatasourceRemote {
       rethrow;
     }
     return _value;
+  }
+
+  @override
+  Future<SuccessWrapper<AuthTokenResponse>> signUp({
+    required SignUpRequest body,
+    Map<String, dynamic>? extras,
+  }) async {
+    final _extra = <String, dynamic>{};
+    _extra.addAll(extras ?? <String, dynamic>{});
+    final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(body.toJson());
+    final _options = _setStreamType<SuccessWrapper<AuthTokenResponse>>(
+      Options(method: 'POST', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            '/auth/sign-up',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late SuccessWrapper<AuthTokenResponse> _value;
+    try {
+      _value = SuccessWrapper<AuthTokenResponse>.fromJson(
+        _result.data!,
+        (json) => AuthTokenResponse.fromJson(json as Map<String, dynamic>),
+      );
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
+  Future<void> logout({
+    required String refreshToken,
+    Map<String, dynamic>? extras,
+  }) async {
+    final _extra = <String, dynamic>{};
+    _extra.addAll(extras ?? <String, dynamic>{});
+    final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{r'x-refresh-token': refreshToken};
+    _headers.removeWhere((k, v) => v == null);
+    const Map<String, dynamic>? _data = null;
+    final _options = _setStreamType<void>(
+      Options(method: 'POST', headers: _headers, extra: _extra)
+          .compose(
+            _dio.options,
+            '/auth/logout',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    await _dio.fetch<void>(_options);
   }
 
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {

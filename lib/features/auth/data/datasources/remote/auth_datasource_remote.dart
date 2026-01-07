@@ -1,6 +1,8 @@
-import 'package:app_instagram_clone/configs/network/responses/successful/successful_response_wrapper.dart';
+import 'package:app_instagram_clone/configs/network/responses/successful/success_wrapper.dart';
 import 'package:app_instagram_clone/features/auth/data/DTOs/requests/sign_in_with_userpass_request.dart';
+import 'package:app_instagram_clone/features/auth/data/DTOs/requests/sign_up_request.dart';
 import 'package:app_instagram_clone/features/auth/data/DTOs/responses/auth_token_response.dart';
+import 'package:app_instagram_clone/features/post/presentation/widgets/post.dart';
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
@@ -14,8 +16,20 @@ abstract class AuthDatasourceRemote {
   factory AuthDatasourceRemote(Dio dio) = _AuthDatasourceRemote;
 
   @POST('/auth/sign-in/userpass')
-  Future<SuccessfulResponseWrapper<AuthTokenResponse>> signInWithUserpass({
+  Future<SuccessWrapper<AuthTokenResponse>> signInWithUserpass({
     @Body() required SignInWithUserpassRequest body, 
     @Extras() Map<String, dynamic>? extras,
+  });
+
+  @POST('/auth/sign-up')
+  Future<SuccessWrapper<AuthTokenResponse>> signUp({
+    @Body() required SignUpRequest body,
+    @Extras() Map<String, dynamic>? extras
+  });
+
+  @POST('/auth/logout')
+  Future<void> logout({
+    @Header('x-refresh-token') required String refreshToken,
+    @Extras() Map<String, dynamic>? extras
   });
 }

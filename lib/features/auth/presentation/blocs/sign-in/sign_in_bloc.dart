@@ -18,6 +18,7 @@ class SignInBloc extends Bloc<SignInEvent, SignInState> {
   SignInBloc(this._signInWithUserpassStrategy)
     : super(const SignInState.inittial()) {
     on<SignInWithUserpassEvent>(_onSignInWithUserpass);
+    on<ClearUnauthorizedEvent>((event, emit) => emit(const SignInState.inittial()),);
   }
 
   Future<void> _onSignInWithUserpass(

@@ -313,10 +313,9 @@ extension CanvasController: InteractiveOverlayDelegate {
     
     func didRemove(_ overlay: InteractiveOverlay) {
         guard let index = overlayStack.firstIndex(of: overlay) else {return}
-        
+        deleteZone.hidden()
         overlayStack.remove(at: index)
         indexIndicator.rebuild(count: overlayStack.count)
     }
-    
     
 }
