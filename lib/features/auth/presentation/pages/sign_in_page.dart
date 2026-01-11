@@ -112,11 +112,11 @@ class _SignInPageState extends State<SignInPage> {
                     buildWhen: (previous, current) => true,
                     builder: (BuildContext context, SignInState state) {
                       final bool isLoading = state.maybeWhen(
-                        loading: () => true,
+                        userpassLoading: () => true,
                         orElse: () => false,
                       );
                       _isUnauthorized = state.maybeWhen(
-                        failure: (failureType, message) =>
+                        userpassFailure: (failureType, message) =>
                             failureType == FailureType.unauthorized
                             ? true
                             : false,

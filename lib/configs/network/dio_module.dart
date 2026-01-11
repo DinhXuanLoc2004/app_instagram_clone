@@ -14,10 +14,12 @@ abstract class DioModule {
     // const String HOST = 'localhost';
     const String HOST = '192.168.1.8';
     const int PORT = 8888;
+    // const int PORT = 8000;
     const String BASE_PATH = 'api';
     const int VERSION = 1;
 
     const String BASE_URL = '$SCHEME://$HOST:$PORT/$BASE_PATH/v$VERSION';
+    // const String BASE_URL = '$SCHEME://$HOST:$PORT';
     const Duration CONNECT_TIMEOUT = Duration(seconds: 10);
     const Duration RECEIVE_TIMEOUT = Duration(seconds: 10);
 

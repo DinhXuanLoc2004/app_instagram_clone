@@ -7,9 +7,10 @@ import 'package:app_instagram_clone/features/auth/domain/usecases/sign_in/strate
 class SignInUsecase<T extends AbsSignInInput> {
   final AbsSignInStrategy _absSignInStrategy;
 
-  const SignInUsecase({required AbsSignInStrategy absSignInStrategy}) : _absSignInStrategy = absSignInStrategy;
+  const SignInUsecase({required AbsSignInStrategy absSignInStrategy})
+    : _absSignInStrategy = absSignInStrategy;
 
-  Future<Result<AuthTokenEntity, Failure>> executed(T input){
+  Future<Result<AuthTokenEntity, Failure>> executed([T? input]) {
     return _absSignInStrategy.signIn(input);
   }
 }

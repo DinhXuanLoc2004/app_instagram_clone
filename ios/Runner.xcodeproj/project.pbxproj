@@ -17,6 +17,8 @@
 		97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FD1CF9000F007C117D /* Assets.xcassets */; };
 		97C147011CF9000F007C117D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FF1CF9000F007C117D /* LaunchScreen.storyboard */; };
 		CE093C7A2EE869DB009DA315 /* DeepAR in Frameworks */ = {isa = PBXBuildFile; productRef = CE093C792EE869DB009DA315 /* DeepAR */; };
+		CE2381302F10A21400F83033 /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = CE23812F2F10A21400F83033 /* FacebookCore */; };
+		CE2381322F10A21400F83033 /* FacebookLogin in Frameworks */ = {isa = PBXBuildFile; productRef = CE2381312F10A21400F83033 /* FacebookLogin */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,11 +67,13 @@
 		97C147021CF9000F007C117D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		97F3955ED99B9781EBC9611E /* Pods-Runner.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.release.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.release.xcconfig"; sourceTree = "<group>"; };
 		BD0B312003A7B4500CADFCC6 /* Pods_RunnerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RunnerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CE4682872F0E748D00E2A8F1 /* Runner.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Runner.entitlements; sourceTree = "<group>"; };
 		E62E2412E966785A9150549E /* Pods-Runner.profile.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.profile.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.profile.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		CE093CDD2EE910C5009DA315 /* Modules */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Modules; sourceTree = "<group>"; };
+		CE2383FD2F10AE8C00F83033 /* Util */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Util; sourceTree = "<group>"; };
 		CE58BB112EE682AE00DEFBDA /* Core */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Core; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
@@ -86,7 +90,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE2381322F10A21400F83033 /* FacebookLogin in Frameworks */,
 				414CA2DAC9EBD94BBE3D8417 /* Pods_Runner.framework in Frameworks */,
+				CE2381302F10A21400F83033 /* FacebookCore in Frameworks */,
 				CE093C7A2EE869DB009DA315 /* DeepAR in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -150,6 +156,8 @@
 		97C146F01CF9000F007C117D /* Runner */ = {
 			isa = PBXGroup;
 			children = (
+				CE2383FD2F10AE8C00F83033 /* Util */,
+				CE4682872F0E748D00E2A8F1 /* Runner.entitlements */,
 				CE093CDD2EE910C5009DA315 /* Modules */,
 				CE58BB112EE682AE00DEFBDA /* Core */,
 				97C146FA1CF9000F007C117D /* Main.storyboard */,
@@ -207,6 +215,7 @@
 				9705A1C41CF9048500538489 /* Embed Frameworks */,
 				3B06AD1E1E4923F5004D2608 /* Thin Binary */,
 				EDE20A0BB1356A2A75E7D18D /* [CP] Embed Pods Frameworks */,
+				03CEE2A84D4C6E42E038DA97 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -214,6 +223,7 @@
 			);
 			fileSystemSynchronizedGroups = (
 				CE093CDD2EE910C5009DA315 /* Modules */,
+				CE2383FD2F10AE8C00F83033 /* Util */,
 				CE58BB112EE682AE00DEFBDA /* Core */,
 			);
 			name = Runner;
@@ -252,6 +262,7 @@
 			mainGroup = 97C146E51CF9000F007C117D;
 			packageReferences = (
 				CE58BB182EE7F80000DEFBDA /* XCRemoteSwiftPackageReference "swift-deepar" */,
+				CE237EDA2F0FAA8300F83033 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */,
 			);
 			productRefGroup = 97C146EF1CF9000F007C117D /* Products */;
 			projectDirPath = "";
@@ -285,6 +296,23 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		03CEE2A84D4C6E42E038DA97 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Runner/Pods-Runner-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Runner/Pods-Runner-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Runner/Pods-Runner-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		3B06AD1E1E4923F5004D2608 /* Thin Binary */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
@@ -485,6 +513,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
 				DEVELOPMENT_TEAM = FQDH6BLRUB;
 				ENABLE_BITCODE = NO;
@@ -669,6 +698,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
 				DEVELOPMENT_TEAM = FQDH6BLRUB;
 				ENABLE_BITCODE = NO;
@@ -693,6 +723,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
 				DEVELOPMENT_TEAM = FQDH6BLRUB;
 				ENABLE_BITCODE = NO;
@@ -746,6 +777,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		CE237EDA2F0FAA8300F83033 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/facebook/facebook-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 14.1.0;
+			};
+		};
 		CE58BB182EE7F80000DEFBDA /* XCRemoteSwiftPackageReference "swift-deepar" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/DeepARSDK/swift-deepar";
@@ -761,6 +800,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CE58BB182EE7F80000DEFBDA /* XCRemoteSwiftPackageReference "swift-deepar" */;
 			productName = DeepAR;
+		};
+		CE23812F2F10A21400F83033 /* FacebookCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CE237EDA2F0FAA8300F83033 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			productName = FacebookCore;
+		};
+		CE2381312F10A21400F83033 /* FacebookLogin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CE237EDA2F0FAA8300F83033 /* XCRemoteSwiftPackageReference "facebook-ios-sdk" */;
+			productName = FacebookLogin;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

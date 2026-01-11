@@ -50,6 +50,7 @@ dependencies:
   flutter_bloc: ^9.1.1
   material_symbols_icons: ^4.2874.0
   readmore: ^3.0.0
+  permission_handler: ^12.0.1
 
 dev_dependencies:
   flutter_test:

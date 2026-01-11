@@ -6,6 +6,7 @@ import 'package:app_instagram_clone/cores/helpers/result/handle_result.dart';
 import 'package:app_instagram_clone/cores/helpers/result/result.dart';
 import 'package:app_instagram_clone/cores/storage/abstraction/abs_auth_token_storage.dart';
 import 'package:app_instagram_clone/cores/storage/model/auth_token_model.dart';
+import 'package:app_instagram_clone/features/auth/data/DTOs/requests/sign_in_with_facebook_request.dart';
 import 'package:app_instagram_clone/features/auth/data/DTOs/requests/sign_in_with_userpass_request.dart';
 import 'package:app_instagram_clone/features/auth/data/DTOs/requests/sign_up_request.dart';
 import 'package:app_instagram_clone/features/auth/data/DTOs/responses/auth_token_response.dart';
@@ -13,6 +14,7 @@ import 'package:app_instagram_clone/features/auth/data/datasources/remote/auth_d
 import 'package:app_instagram_clone/features/auth/data/mappers/auth_mapper.dart';
 import 'package:app_instagram_clone/features/auth/domain/abstract_repositories/abs_auth_repository.dart';
 import 'package:app_instagram_clone/features/auth/domain/entities/auth_token_entity.dart';
+import 'package:app_instagram_clone/features/auth/domain/ports/inputs/sign-in/extendtions/sign_in_with_facebook_input.dart';
 import 'package:app_instagram_clone/features/auth/domain/ports/inputs/sign-in/extendtions/sign_in_with_userpass_input.dart';
 import 'package:app_instagram_clone/features/auth/domain/ports/inputs/sign_up_input.dart';
 import 'package:injectable/injectable.dart';
@@ -52,15 +54,37 @@ class ImpAuthRepostitory extends AbsAuthRepository {
   }
 
   @override
+  Future<Result<AuthTokenEntity, Failure>> signInWithFacebook(
+    SignInWithFacebookInput input,
+  ) async {
+    return HandleResult.asyncGuard(() async {
+      final SignInWithFacebookRequest body = _authMapper.convert(input);
+      final response = await _authDatasourceRemote.signInWithFacebook(
+        body: body,
+        extras: _optionExtra.toJson()
+      );
+      final AuthTokenEntity tokenEntity = _authMapper.convert(
+        response.metadata,
+      );
+      return tokenEntity;
+    });
+  }
+
+  @override
   Future<Result<AuthTokenEntity, Failure>> signUp(SignUpInput input) {
     return HandleResult.asyncGuard(() async {
       final SignUpRequest request = _authMapper.convert(input);
       Log.info('request:: $request');
 
-      final response = await _authDatasourceRemote.signUp(body: request, extras: _optionExtra.toJson());
+      final response = await _authDatasourceRemote.signUp(
+        body: request,
+        extras: _optionExtra.toJson(),
+      );
       Log.debug('response:: $response');
 
-      final AuthTokenEntity tokenEntity = _authMapper.convert(response.metadata);
+      final AuthTokenEntity tokenEntity = _authMapper.convert(
+        response.metadata,
+      );
       Log.info('tokenEntity:: $tokenEntity');
 
       return tokenEntity;
@@ -70,7 +94,10 @@ class ImpAuthRepostitory extends AbsAuthRepository {
   @override
   Future<Result<void, Failure>> logout(String refreshToken) {
     return HandleResult.asyncGuard(() async {
-      await _authDatasourceRemote.logout(refreshToken: refreshToken, extras: _optionExtra.toJson());
+      await _authDatasourceRemote.logout(
+        refreshToken: refreshToken,
+        extras: _optionExtra.toJson(),
+      );
       return null;
     });
   }

@@ -7,4 +7,6 @@ final class SignInWithUserpassEvent extends SignInEvent{
   SignInWithUserpassEvent({required this.email, required this.password});
 }
 
+final class SignInWithFBEvent extends SignInEvent{}
+
 final class ClearUnauthorizedEvent extends SignInEvent{}

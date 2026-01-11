@@ -55,14 +55,16 @@ extension SignInStatePatterns on SignInState {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Initial value)?  inittial,TResult Function( _Loading value)?  loading,TResult Function( _Success value)?  success,TResult Function( _Failure value)?  failure,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Initial value)?  inittial,TResult Function( _UserpassLoading value)?  userpassLoading,TResult Function( _FacebookLoading value)?  facebookLoading,TResult Function( _Success value)?  success,TResult Function( _UserpassFailure value)?  userpassFailure,TResult Function( _FacebookFailure value)?  facebookFailure,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case _Initial() when inittial != null:
-return inittial(_that);case _Loading() when loading != null:
-return loading(_that);case _Success() when success != null:
-return success(_that);case _Failure() when failure != null:
-return failure(_that);case _:
+return inittial(_that);case _UserpassLoading() when userpassLoading != null:
+return userpassLoading(_that);case _FacebookLoading() when facebookLoading != null:
+return facebookLoading(_that);case _Success() when success != null:
+return success(_that);case _UserpassFailure() when userpassFailure != null:
+return userpassFailure(_that);case _FacebookFailure() when facebookFailure != null:
+return facebookFailure(_that);case _:
   return orElse();
 
 }
@@ -80,14 +82,16 @@ return failure(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Initial value)  inittial,required TResult Function( _Loading value)  loading,required TResult Function( _Success value)  success,required TResult Function( _Failure value)  failure,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Initial value)  inittial,required TResult Function( _UserpassLoading value)  userpassLoading,required TResult Function( _FacebookLoading value)  facebookLoading,required TResult Function( _Success value)  success,required TResult Function( _UserpassFailure value)  userpassFailure,required TResult Function( _FacebookFailure value)  facebookFailure,}){
 final _that = this;
 switch (_that) {
 case _Initial():
-return inittial(_that);case _Loading():
-return loading(_that);case _Success():
-return success(_that);case _Failure():
-return failure(_that);case _:
+return inittial(_that);case _UserpassLoading():
+return userpassLoading(_that);case _FacebookLoading():
+return facebookLoading(_that);case _Success():
+return success(_that);case _UserpassFailure():
+return userpassFailure(_that);case _FacebookFailure():
+return facebookFailure(_that);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -104,14 +108,16 @@ return failure(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Initial value)?  inittial,TResult? Function( _Loading value)?  loading,TResult? Function( _Success value)?  success,TResult? Function( _Failure value)?  failure,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Initial value)?  inittial,TResult? Function( _UserpassLoading value)?  userpassLoading,TResult? Function( _FacebookLoading value)?  facebookLoading,TResult? Function( _Success value)?  success,TResult? Function( _UserpassFailure value)?  userpassFailure,TResult? Function( _FacebookFailure value)?  facebookFailure,}){
 final _that = this;
 switch (_that) {
 case _Initial() when inittial != null:
-return inittial(_that);case _Loading() when loading != null:
-return loading(_that);case _Success() when success != null:
-return success(_that);case _Failure() when failure != null:
-return failure(_that);case _:
+return inittial(_that);case _UserpassLoading() when userpassLoading != null:
+return userpassLoading(_that);case _FacebookLoading() when facebookLoading != null:
+return facebookLoading(_that);case _Success() when success != null:
+return success(_that);case _UserpassFailure() when userpassFailure != null:
+return userpassFailure(_that);case _FacebookFailure() when facebookFailure != null:
+return facebookFailure(_that);case _:
   return null;
 
 }
@@ -128,13 +134,15 @@ return failure(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  inittial,TResult Function()?  loading,TResult Function()?  success,TResult Function( FailureType failureType,  String message)?  failure,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  inittial,TResult Function()?  userpassLoading,TResult Function()?  facebookLoading,TResult Function()?  success,TResult Function( FailureType failureType,  String message)?  userpassFailure,TResult Function( FailureType failureType,  String message)?  facebookFailure,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Initial() when inittial != null:
-return inittial();case _Loading() when loading != null:
-return loading();case _Success() when success != null:
-return success();case _Failure() when failure != null:
-return failure(_that.failureType,_that.message);case _:
+return inittial();case _UserpassLoading() when userpassLoading != null:
+return userpassLoading();case _FacebookLoading() when facebookLoading != null:
+return facebookLoading();case _Success() when success != null:
+return success();case _UserpassFailure() when userpassFailure != null:
+return userpassFailure(_that.failureType,_that.message);case _FacebookFailure() when facebookFailure != null:
+return facebookFailure(_that.failureType,_that.message);case _:
   return orElse();
 
 }
@@ -152,13 +160,15 @@ return failure(_that.failureType,_that.message);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  inittial,required TResult Function()  loading,required TResult Function()  success,required TResult Function( FailureType failureType,  String message)  failure,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  inittial,required TResult Function()  userpassLoading,required TResult Function()  facebookLoading,required TResult Function()  success,required TResult Function( FailureType failureType,  String message)  userpassFailure,required TResult Function( FailureType failureType,  String message)  facebookFailure,}) {final _that = this;
 switch (_that) {
 case _Initial():
-return inittial();case _Loading():
-return loading();case _Success():
-return success();case _Failure():
-return failure(_that.failureType,_that.message);case _:
+return inittial();case _UserpassLoading():
+return userpassLoading();case _FacebookLoading():
+return facebookLoading();case _Success():
+return success();case _UserpassFailure():
+return userpassFailure(_that.failureType,_that.message);case _FacebookFailure():
+return facebookFailure(_that.failureType,_that.message);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -175,13 +185,15 @@ return failure(_that.failureType,_that.message);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  inittial,TResult? Function()?  loading,TResult? Function()?  success,TResult? Function( FailureType failureType,  String message)?  failure,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  inittial,TResult? Function()?  userpassLoading,TResult? Function()?  facebookLoading,TResult? Function()?  success,TResult? Function( FailureType failureType,  String message)?  userpassFailure,TResult? Function( FailureType failureType,  String message)?  facebookFailure,}) {final _that = this;
 switch (_that) {
 case _Initial() when inittial != null:
-return inittial();case _Loading() when loading != null:
-return loading();case _Success() when success != null:
-return success();case _Failure() when failure != null:
-return failure(_that.failureType,_that.message);case _:
+return inittial();case _UserpassLoading() when userpassLoading != null:
+return userpassLoading();case _FacebookLoading() when facebookLoading != null:
+return facebookLoading();case _Success() when success != null:
+return success();case _UserpassFailure() when userpassFailure != null:
+return userpassFailure(_that.failureType,_that.message);case _FacebookFailure() when facebookFailure != null:
+return facebookFailure(_that.failureType,_that.message);case _:
   return null;
 
 }
@@ -224,8 +236,8 @@ String toString() {
 /// @nodoc
 
 
-class _Loading implements SignInState {
-  const _Loading();
+class _UserpassLoading implements SignInState {
+  const _UserpassLoading();
   
 
 
@@ -235,7 +247,7 @@ class _Loading implements SignInState {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Loading);
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _UserpassLoading);
 }
 
 
@@ -244,7 +256,39 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'SignInState.loading()';
+  return 'SignInState.userpassLoading()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+
+
+class _FacebookLoading implements SignInState {
+  const _FacebookLoading();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _FacebookLoading);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'SignInState.facebookLoading()';
 }
 
 
@@ -288,8 +332,8 @@ String toString() {
 /// @nodoc
 
 
-class _Failure implements SignInState {
-  const _Failure(this.failureType, this.message);
+class _UserpassFailure implements SignInState {
+  const _UserpassFailure(this.failureType, this.message);
   
 
  final  FailureType failureType;
@@ -299,13 +343,13 @@ class _Failure implements SignInState {
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-_$FailureCopyWith<_Failure> get copyWith => __$FailureCopyWithImpl<_Failure>(this, _$identity);
+_$UserpassFailureCopyWith<_UserpassFailure> get copyWith => __$UserpassFailureCopyWithImpl<_UserpassFailure>(this, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Failure&&(identical(other.failureType, failureType) || other.failureType == failureType)&&(identical(other.message, message) || other.message == message));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _UserpassFailure&&(identical(other.failureType, failureType) || other.failureType == failureType)&&(identical(other.message, message) || other.message == message));
 }
 
 
@@ -314,15 +358,15 @@ int get hashCode => Object.hash(runtimeType,failureType,message);
 
 @override
 String toString() {
-  return 'SignInState.failure(failureType: $failureType, message: $message)';
+  return 'SignInState.userpassFailure(failureType: $failureType, message: $message)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class _$FailureCopyWith<$Res> implements $SignInStateCopyWith<$Res> {
-  factory _$FailureCopyWith(_Failure value, $Res Function(_Failure) _then) = __$FailureCopyWithImpl;
+abstract mixin class _$UserpassFailureCopyWith<$Res> implements $SignInStateCopyWith<$Res> {
+  factory _$UserpassFailureCopyWith(_UserpassFailure value, $Res Function(_UserpassFailure) _then) = __$UserpassFailureCopyWithImpl;
 @useResult
 $Res call({
  FailureType failureType, String message
@@ -333,17 +377,85 @@ $Res call({
 
 }
 /// @nodoc
-class __$FailureCopyWithImpl<$Res>
-    implements _$FailureCopyWith<$Res> {
-  __$FailureCopyWithImpl(this._self, this._then);
+class __$UserpassFailureCopyWithImpl<$Res>
+    implements _$UserpassFailureCopyWith<$Res> {
+  __$UserpassFailureCopyWithImpl(this._self, this._then);
 
-  final _Failure _self;
-  final $Res Function(_Failure) _then;
+  final _UserpassFailure _self;
+  final $Res Function(_UserpassFailure) _then;
 
 /// Create a copy of SignInState
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') $Res call({Object? failureType = null,Object? message = null,}) {
-  return _then(_Failure(
+  return _then(_UserpassFailure(
+null == failureType ? _self.failureType : failureType // ignore: cast_nullable_to_non_nullable
+as FailureType,null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class _FacebookFailure implements SignInState {
+  const _FacebookFailure(this.failureType, this.message);
+  
+
+ final  FailureType failureType;
+ final  String message;
+
+/// Create a copy of SignInState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$FacebookFailureCopyWith<_FacebookFailure> get copyWith => __$FacebookFailureCopyWithImpl<_FacebookFailure>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _FacebookFailure&&(identical(other.failureType, failureType) || other.failureType == failureType)&&(identical(other.message, message) || other.message == message));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,failureType,message);
+
+@override
+String toString() {
+  return 'SignInState.facebookFailure(failureType: $failureType, message: $message)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$FacebookFailureCopyWith<$Res> implements $SignInStateCopyWith<$Res> {
+  factory _$FacebookFailureCopyWith(_FacebookFailure value, $Res Function(_FacebookFailure) _then) = __$FacebookFailureCopyWithImpl;
+@useResult
+$Res call({
+ FailureType failureType, String message
+});
+
+
+
+
+}
+/// @nodoc
+class __$FacebookFailureCopyWithImpl<$Res>
+    implements _$FacebookFailureCopyWith<$Res> {
+  __$FacebookFailureCopyWithImpl(this._self, this._then);
+
+  final _FacebookFailure _self;
+  final $Res Function(_FacebookFailure) _then;
+
+/// Create a copy of SignInState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? failureType = null,Object? message = null,}) {
+  return _then(_FacebookFailure(
 null == failureType ? _self.failureType : failureType // ignore: cast_nullable_to_non_nullable
 as FailureType,null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
 as String,

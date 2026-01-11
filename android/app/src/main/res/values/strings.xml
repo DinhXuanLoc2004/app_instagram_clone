@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Instagram</string>
+    <string name="facebook_app_id">2494087481007629</string>
+    <string name="fb_login_protocol_scheme">fb2494087481007629</string>
+    <string name="facebook_client_token">c326c78aa8a294749b644fb99067d61c</string>
+</resources>
